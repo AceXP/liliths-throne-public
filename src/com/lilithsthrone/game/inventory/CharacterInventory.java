@@ -28,7 +28,7 @@ import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingAccess;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.AbstractFilledBreastPump;
-import com.lilithsthrone.game.inventory.item.AbstractFilledCondom;
+import com.lilithsthrone.game.inventory.item.AbstractFilledItem;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -373,7 +373,7 @@ public class CharacterInventory implements XMLSaving {
 					inventory.addClothing(Main.game.getItemGen().generateClothing("innoxia_hair_rose", PresetColour.CLOTHING_RED_DARK, PresetColour.CLOTHING_GREEN_DARK, null, false), count);
 					
 				} else if(id.equals(ItemType.getItemToIdMap().get(ItemType.CONDOM_USED))) {
-					itemMapToAdd.put(AbstractFilledCondom.loadFromXML(e, doc), count);
+					itemMapToAdd.put(AbstractFilledItem.loadFromXML(e, doc), count);
 					
 				} else if(id.equals(ItemType.getItemToIdMap().get(ItemType.MOO_MILKER_FULL))) {
 					itemMapToAdd.put(AbstractFilledBreastPump.loadFromXML(e, doc), count);

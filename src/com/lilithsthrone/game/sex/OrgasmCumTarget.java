@@ -9,6 +9,7 @@ public enum OrgasmCumTarget {
 
 	// Specials:
 	LILAYA_PANTIES("into Lilaya's panties", false),
+	BOTTLE("into a bottle", false),
 	
 	WALL("up the wall", false),
 	FLOOR("onto floor", false),

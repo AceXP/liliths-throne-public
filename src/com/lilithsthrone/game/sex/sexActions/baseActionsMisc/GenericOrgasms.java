@@ -21,6 +21,7 @@ import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Torso;
 import com.lilithsthrone.game.character.body.Wing;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
 import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -35,6 +36,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
+import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.CondomFailure;
 import com.lilithsthrone.game.sex.OrgasmCumTarget;
@@ -1387,6 +1389,9 @@ public class GenericOrgasms {
 				}
 			case WALL:
 				return " all up the wall.";
+				
+			case BOTTLE:
+				return " into a bottle.";
 				
 			case SELF_GROIN:
 				if (!targetAreaClothingCummedOn.isEmpty()) {
@@ -4782,6 +4787,49 @@ public class GenericOrgasms {
 		}
 	};
 	
+	public static final SexAction GENERIC_ORGASM_BOTTLE = new SexAction(GENERIC_ORGASM_FLOOR) {
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return isCumTargetRequirementsMet(OrgasmCumTarget.BOTTLE) &&
+					Main.sex.getCharacterPerformingAction().hasItem(Main.game.getItemGen().generateItem(ItemType.EMPTY_BOTTLE));
+		}
+		
+		@Override
+		public String getActionTitle() {
+			if(!Main.sex.getCharactersHavingOngoingActionWith(Main.sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS).isEmpty()) {
+				if(!Main.sex.getOngoingCharactersUsingAreas(Main.sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS, SexAreaPenetration.FINGER).isEmpty()) {
+					return "Handjob into bottle";
+				}
+				return "Pull out (bottle)";
+			}
+			return "Cum in bottle";
+		}
+		
+		@Override
+		public String getActionDescription() {
+			return "You've reached your climax, and can't hold back your orgasm any longer. Direct your cum into a botle.";
+		}
+		
+		@Override
+		public String getDescription() {
+			return Main.sex.getCharacterPerformingAction().getSexActionOrgasmOverride(this, OrgasmCumTarget.BOTTLE, false).getDescription();
+		}
+		
+		@Override
+		public void applyEffects() {
+			applyGenericPullOutEffects(this, OrgasmCumTarget.BOTTLE);
+			GameCharacter cumProvider = Main.sex.getCharacterPerformingAction();
+			cumProvider.removeItem(Main.game.getItemGen().generateItem(ItemType.EMPTY_BOTTLE));
+			cumProvider.addItem(Main.game.getItemGen().generateFilledItem(ItemType.FILLED_BOTTLE, cumProvider.getCovering(BodyCoveringType.CUM).getPrimaryColour(),
+					cumProvider, cumProvider.getCum(), Math.min(cumProvider.getCurrentPenisRawCumStorageValue(),100)),false);
+		}
+		
+		@Override
+		public boolean endsSex() {
+			return Main.sex.getCharacterPerformingAction().getSexActionOrgasmOverride(this, OrgasmCumTarget.BOTTLE, false).isEndsSex();
+		}
+	};
+
 	public static final SexAction GENERIC_ORGASM_ASS = new SexAction(GENERIC_ORGASM_FLOOR) {
 		@Override
 		public SexParticipantType getParticipantType() {

@@ -2656,7 +2656,7 @@ public class Sex {
 					Main.sex.getCharacterPerformingAction().getClothingInSlot(InventorySlot.PENIS).setSealed(false);
 					if(Main.sex.getCharacterPerformingAction().getPenisRawOrgasmCumQuantity()>0) {
 						stringBuilderForAppendingDescriptions.append(Main.game.getPlayer().addItem(
-								Main.game.getItemGen().generateFilledCondom(
+								Main.game.getItemGen().generateFilledItem(
 										Main.sex.getCharacterPerformingAction().getClothingInSlot(InventorySlot.PENIS).getClothingType().equals(ClothingType.getClothingTypeFromId("innoxia_penis_condom_webbing"))
 											?ItemType.CONDOM_USED_WEBBING
 											:ItemType.CONDOM_USED,

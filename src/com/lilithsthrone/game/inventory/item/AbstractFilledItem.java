@@ -27,13 +27,13 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.0
  * @author Innoxia
  */
-public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
+public class AbstractFilledItem extends AbstractItem implements XMLSaving {
 	
 	private String cumProvider;
 	private FluidCum cum;
 	private int millilitresStored;
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
+	public AbstractFilledItem(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
 		this.cumProvider = cumProvider.getId();
@@ -47,7 +47,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		this.millilitresStored = millilitresStored;
 	}
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, String cumProviderId, FluidCum cum, int millilitresStored) {
+	public AbstractFilledItem(AbstractItemType itemType, Colour colour, String cumProviderId, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
 		this.cumProvider = cumProviderId;
@@ -64,9 +64,9 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	@Override
 	public boolean equals(Object o) {
 		if(super.equals(o)) {
-			return (o instanceof AbstractFilledCondom)
-					&& ((AbstractFilledCondom)o).getCumProviderId().equals(this.getCumProviderId())
-					&& ((AbstractFilledCondom)o).getCum().equals(cum);
+			return (o instanceof AbstractFilledItem)
+					&& ((AbstractFilledItem)o).getCumProviderId().equals(this.getCumProviderId())
+					&& ((AbstractFilledItem)o).getCum().equals(cum);
 		} else {
 			return false;
 		}
@@ -103,13 +103,13 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		return element;
 	}
 
-	public static AbstractFilledCondom loadFromXML(Element parentElement, Document doc) {
+	public static AbstractFilledItem loadFromXML(Element parentElement, Document doc) {
 		String provider = parentElement.getAttribute("cumProvider");
 		if(provider.isEmpty()) {
 			provider = parentElement.getAttribute("cumProvidor"); // Support for old versions in which I could not spell
 		}
 		
-		return new AbstractFilledCondom(
+		return new AbstractFilledItem(
 				ItemType.getIdToItemMap().get(parentElement.getAttribute("id")),
 				PresetColour.getColourFromId(parentElement.getAttribute("colour")),
 				provider,
@@ -144,15 +144,19 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		if(target.hasFetish(Fetish.FETISH_CUM_ADDICT)) {
 			return UtilText.parse(target, user,
 					"<p>"
-						+ "[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily [npc.verb(gulp)] down the slimy fluid."
-						+ " Darting [npc.her] [npc.tongue] out, [npc.she] desperately [npc.verb(lick)] up every last drop of cum; only discarding the condom once [npc.sheIs] sure that's it's completely empty."
+						+ "[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily [npc.verb(gulp)] down the slimy fluid,"
+						+ " smacking [npc.her] [npc.lips] as the " + this.cum.getFlavour().getRandomFlavourDescriptor() + " taste fills [npc.her] mouth."
+						+ " Darting [npc.her] [npc.tongue] out, [npc.she] desperately [npc.verb(lick)] up every last drop of cum; only discarding the "
+						+ this.getName() + " once [npc.sheIs] sure that it's completely empty."
 					+ "</p>"
 					+ target.ingestFluid(getCumProvider(), cum, SexAreaOrifice.MOUTH, millilitresStored));
 		} else {
 			return UtilText.parse(target, user,
 					"<p>"
-						+ "[npc.Name] [npc.verb(scrunch)] [npc.her] [npc.eyes] shut as [npc.she] [npc.verb(gulp)] down the slimy fluid,"
-						+ " trying [npc.her] best not to think about what [npc.sheHas] just done as "+(user.equals(target)?"[npc.she] [npc.verb(throw)]":"[npc2.name] [npc2.verb(throw)]")+" the now-empty condom to the floor..."
+						+ "[npc.Name] [npc.verb(scrunch)] [npc.her] [npc.eyes] shut as [npc.she] [npc.verb(gulp)] down the slimy "
+						+ this.cum.getFlavour().getRandomFlavourDescriptor() + " fluid, trying [npc.her] best not to think about what"
+					    + " [npc.sheHas] just done as "+(user.equals(target)?"[npc.she] [npc.verb(throw)]":"[npc2.name] [npc2.verb(throw)]")
+						+ " the now-empty "+this.getName()+" to the floor..."
 					+ "</p>"
 					+ target.ingestFluid(getCumProvider(), cum, SexAreaOrifice.MOUTH, millilitresStored));
 		}

@@ -118,7 +118,17 @@ public class ItemEffectType {
 		
 		@Override
 		public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
-			return ""; // THIS EFFECT IS NOT USED, AS AbstractFilledCondom OVERRIDES THE USUAL AbstractItem's applyEffects() METHOD!!!
+			return ""; // THIS EFFECT IS NOT USED, AS AbstractFilledItem OVERRIDES THE USUAL AbstractItem's applyEffects() METHOD!!!
+		}
+	};
+	
+	public static AbstractItemEffectType FILLED_BOTTLE_DRINK = new AbstractItemEffectType(Util.newArrayListOfValues(
+			"Provides a slimy snack."),
+			PresetColour.GENERIC_SEX) {
+		
+		@Override
+		public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
+			return ""; // THIS EFFECT IS NOT USED, AS AbstractFilledItem OVERRIDES THE USUAL AbstractItem's applyEffects() METHOD!!!
 		}
 	};
 

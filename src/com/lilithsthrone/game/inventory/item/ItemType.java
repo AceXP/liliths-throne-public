@@ -1129,6 +1129,60 @@ public class ItemType {
 		}
 	};
 	
+	// BOTTLES
+	
+	public static AbstractItemType EMPTY_BOTTLE = new AbstractItemType(20,
+			"",
+			false,
+			"bottle",
+			"bottles",
+			"A bottle that can be used to store all kinds of fluids. It can hold up to "+Units.fluid(100)+" of liquid.",
+			"bottleEmpty",
+			PresetColour.COVERING_WHITE,
+			null,
+			null,
+			Rarity.COMMON,
+			null,
+			Util.newArrayListOfValues(
+					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+					ItemTag.SUBMISSION_TUNNEL_SPAWN)) {
+		@Override
+		public String getUseName() { return "inspect"; }
+		@Override
+		public boolean isConsumedOnUse() {
+			return false;
+		}
+		@Override
+		public String getUseDescription(GameCharacter user, GameCharacter target) {
+			return "This glass bottle with a cork stopper can obviously be used to store fluids. It reminds you of the kind of bottle you can see in a laboratory. It looks like it can hold up to "+Units.fluid(100)+" of liquid. Maybe it might come in handy someday.";
+		}
+	};
+	
+	public static AbstractItemType FILLED_BOTTLE = new AbstractItemType(100,
+			"",
+			false,
+			"bottle",
+			"bottles",
+			"A bottle that is used to store some kind of fluid.",
+			"bottleFilled",
+			PresetColour.COVERING_WHITE,
+			null,
+			null,
+			Rarity.UNCOMMON,
+			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.FILLED_BOTTLE_DRINK)),
+			null) {
+		@Override
+		public String getUseName() { return "drink"; }
+		
+		@Override
+		public String getUseDescription(GameCharacter user, GameCharacter target) {
+			return getGenericUseDescription(user, target,
+					"Taking off the stopper, you bring the bottle up to your lips and swallow the slimy contents.",
+					"Taking off the stopper, you bring the bottle up to [npc.namePos] [npc.lips], and force [npc.herHim] to swallow the slimy contents.",
+					"Taking off the stopper, [npc.name] brings the bottle up to [npc.her] [npc.lips], and swallows the slimy contents.",
+					"Taking off the stopper, [npc.name] brings the bottle up to your [pc.lips], and forces you to swallow the slimy contents.");
+		}
+	};
 	
 	// Non-TF:
 

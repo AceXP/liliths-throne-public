@@ -17,7 +17,7 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractFilledBreastPump;
-import com.lilithsthrone.game.inventory.item.AbstractFilledCondom;
+import com.lilithsthrone.game.inventory.item.AbstractFilledItem;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -46,8 +46,8 @@ public class ItemGeneration {
 		return new AbstractItem(itemType) {};
 	}
 	
-	public AbstractItem generateFilledCondom(AbstractItemType filledCondomType, Colour colour, GameCharacter character, FluidCum cum, int millilitres) {
-		return new AbstractFilledCondom(filledCondomType, colour, character, cum, millilitres) {};
+	public AbstractItem generateFilledItem(AbstractItemType filledItemType, Colour colour, GameCharacter character, FluidCum cum, int millilitres) {
+		return new AbstractFilledItem(filledItemType, colour, character, cum, millilitres) {};
 	}
 
 	public AbstractItem generateFilledBreastPump(Colour colour, GameCharacter character, FluidMilk milk, int quantity) {

@@ -41,6 +41,7 @@ public class StandardSexActionInteractions {
 						new SexActionInteractions(
 						null,
 						Util.newArrayListOfValues(
+								OrgasmCumTarget.BOTTLE,
 								OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_LEGS,

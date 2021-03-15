@@ -7832,7 +7832,7 @@ public abstract class GameCharacter implements XMLSaving {
 									} else {
 										ingestFluidSB.append(UtilText.parse(partner, "<p class='centre noPad'>[npc.NamePos] [npc.cum] was [style.boldGood(caught in [npc.her] condom)]!</p>"));
 										ingestFluidSB.append(Main.game.getPlayer().addItem(
-												Main.game.getItemGen().generateFilledCondom(
+												Main.game.getItemGen().generateFilledItem(
 														partner.getClothingInSlot(InventorySlot.PENIS).getClothingType().equals(ClothingType.getClothingTypeFromId("innoxia_penis_condom_webbing"))
 															?ItemType.CONDOM_USED_WEBBING
 															:ItemType.CONDOM_USED,
@@ -8330,7 +8330,7 @@ public abstract class GameCharacter implements XMLSaving {
 									} else {
 										ingestFluidSB.append(UtilText.parse(this, "<p class='centre noPad'>[npc.NamePos] [npc.cum] was [style.boldGood(caught in [npc.her] condom)]!</p>"));
 										ingestFluidSB.append(Main.game.getPlayer().addItem(
-												Main.game.getItemGen().generateFilledCondom(
+												Main.game.getItemGen().generateFilledItem(
 														this.getClothingInSlot(InventorySlot.PENIS).getClothingType().equals(ClothingType.getClothingTypeFromId("innoxia_penis_condom_webbing"))
 															?ItemType.CONDOM_USED_WEBBING
 															:ItemType.CONDOM_USED,
