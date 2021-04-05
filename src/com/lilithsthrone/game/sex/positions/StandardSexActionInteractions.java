@@ -31,6 +31,9 @@ public class StandardSexActionInteractions {
 				OrgasmCumTarget.SELF_GROIN,
 				OrgasmCumTarget.SELF_LEGS,
 				OrgasmCumTarget.SELF_FEET,
+				OrgasmCumTarget.SELF_HANDS,
+				OrgasmCumTarget.SELF_FACE,
+				OrgasmCumTarget.SELF_BREASTS,
 				OrgasmCumTarget.FLOOR),
 		null);
 	
@@ -46,6 +49,9 @@ public class StandardSexActionInteractions {
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_FEET,
+								OrgasmCumTarget.SELF_HANDS,
+								OrgasmCumTarget.SELF_FACE,
+								OrgasmCumTarget.SELF_BREASTS,
 								OrgasmCumTarget.FLOOR),
 						Util.newArrayListOfValues()))));
 			}
