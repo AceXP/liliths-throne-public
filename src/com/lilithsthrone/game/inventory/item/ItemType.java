@@ -691,6 +691,15 @@ public class ItemType {
 					"Taking off the stopper, [npc.name] brings the bottle up to [npc.her] [npc.lips], and swallows the slimy contents.",
 					"Taking off the stopper, [npc.name] brings the bottle up to your [pc.lips], and forces you to swallow the slimy contents.");
 		}
+		@Override
+		public boolean isAbleToBeUsed(GameCharacter target) {
+			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue();
+		}
+		@Override
+		public String getUnableToBeUsedDescription(GameCharacter target) {
+			return "You can't imagine actually drinking this.<br/>"
+					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to put this to use!)";
+		}
 	};
 	
 	// Non-TF:
@@ -810,9 +819,13 @@ public class ItemType {
 					"Untying the top of the used condom-webbing, [npc.name] brings it up to your [pc.lips], and forces you to swallow the slimy contents.");
 		}
 		@Override
+		public boolean isAbleToBeUsed(GameCharacter target) {
+			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue();
+		}
+		@Override
 		public String getUnableToBeUsedDescription(GameCharacter target) {
 			return "You can't think of a use for this. Maybe it's best to throw it away...<br/>"
-					+ "(You need have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
+					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
 		}
 		@Override
 		public boolean isAbleToBeUsedInCombatAllies() {
@@ -851,9 +864,13 @@ public class ItemType {
 					"Untying the top of the used condom, [npc.name] brings it up to your [pc.lips], and forces you to swallow the slimy contents.");
 		}
 		@Override
+		public boolean isAbleToBeUsed(GameCharacter target) {
+			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue();
+		}
+		@Override
 		public String getUnableToBeUsedDescription(GameCharacter target) {
 			return "You can't think of a use for this. Maybe it's best to throw it away...<br/>"
-					+ "(You need have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
+					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
 		}
 		@Override
 		public boolean isAbleToBeUsedInCombatAllies() {
