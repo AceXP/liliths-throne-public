@@ -18,6 +18,7 @@ import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
+import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
@@ -693,12 +694,13 @@ public class ItemType {
 		}
 		@Override
 		public boolean isAbleToBeUsed(GameCharacter target) {
-			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue();
+			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue() || target.hasFetish(Fetish.FETISH_CUM_ADDICT);
 		}
 		@Override
 		public String getUnableToBeUsedDescription(GameCharacter target) {
 			return "You can't imagine actually drinking this.<br/>"
-					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to put this to use!)";
+					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption "
+					+ "or be a cum addict to put this to use!)";
 		}
 	};
 	
@@ -820,12 +822,12 @@ public class ItemType {
 		}
 		@Override
 		public boolean isAbleToBeUsed(GameCharacter target) {
-			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue();
+			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue() || target.hasFetish(Fetish.FETISH_CUM_ADDICT);
 		}
 		@Override
 		public String getUnableToBeUsedDescription(GameCharacter target) {
 			return "You can't think of a use for this. Maybe it's best to throw it away...<br/>"
-					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
+					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption or be a cum addict to know how to use this!)";
 		}
 		@Override
 		public boolean isAbleToBeUsedInCombatAllies() {
@@ -865,12 +867,12 @@ public class ItemType {
 		}
 		@Override
 		public boolean isAbleToBeUsed(GameCharacter target) {
-			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue();
+			return target.getAttributeValue(Attribute.MAJOR_CORRUPTION) >= CorruptionLevel.THREE_DIRTY.getMinimumValue() || target.hasFetish(Fetish.FETISH_CUM_ADDICT);
 		}
 		@Override
 		public String getUnableToBeUsedDescription(GameCharacter target) {
 			return "You can't think of a use for this. Maybe it's best to throw it away...<br/>"
-					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
+					+ "(You need to have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption or be a cum addict to know how to use this!)";
 		}
 		@Override
 		public boolean isAbleToBeUsedInCombatAllies() {
