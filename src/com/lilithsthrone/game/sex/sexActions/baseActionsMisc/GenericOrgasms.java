@@ -4,6 +4,7 @@ import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.*;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -13,6 +14,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
+import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.OrgasmEncourageBehaviour;
@@ -125,7 +127,7 @@ public class GenericOrgasms {
 						genericOrgasmSB.append(UtilText.parse(characterOrgasming, lockingCharacter,
 								"With [npc2.namePos] [npc2.tail] wrapped tightly around [npc.her] lower back, [npc.nameIsFull] unable to pull out, and [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(start)] to orgasm."));
 
-					} else if(bodypart == Tail.class) {
+					} else if(bodypart == Wing.class) {
 						genericOrgasmSB.append(UtilText.parse(characterOrgasming, lockingCharacter,
 								"With [npc2.namePos] [npc2.wingSize] [npc2.wings] wrapped tightly around [npc.her] body, [npc.nameIsFull] unable to pull out, and [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(start)] to orgasm."));
 
@@ -4957,7 +4959,7 @@ public class GenericOrgasms {
 
 		@Override
 		public String getActionDescription() {
-			return "You've reached your climax, and can't hold back your orgasm any longer. Direct your cum into a botle.";
+			return "You've reached your climax, and can't hold back your orgasm any longer. Direct your cum into a bottle.";
 		}
 
 		@Override
