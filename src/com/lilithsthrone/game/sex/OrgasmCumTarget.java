@@ -1,8 +1,10 @@
 package com.lilithsthrone.game.sex;
 
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+
 /**
  * @since 0.1.97
- * @version 0.3.3
+ * @version 0.4.1
  * @author Innoxia
  */
 public enum OrgasmCumTarget {
@@ -11,12 +13,18 @@ public enum OrgasmCumTarget {
 	LILAYA_PANTIES("into Lilaya's panties", false),
 	BOTTLE("into a bottle", false),
 	
-	WALL("up the wall", false),
+	WALL("up the wall", false) {
+		@Override
+		public String getName() {
+			return UtilText.parse("up the [pc.wall]");
+		}
+	},
 	FLOOR("onto floor", false),
 	
 	INSIDE("inside", true),
 	INSIDE_SWITCH_DOUBLE("inside (double)", true),
 	
+	ARMPITS("over armpit", true),
 	ASS("over ass", true),
 	GROIN("over groin", true),
 	BREASTS("onto breasts", true),

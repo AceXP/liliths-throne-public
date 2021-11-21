@@ -571,7 +571,7 @@ public class ItemType {
 	
 	// Crafting outputs:
 	
-	public static AbstractItemType POTION = new AbstractItemType(750,
+	public static AbstractItemType POTION = new AbstractItemType(500,
 			"",
 			false,
 			"potion",
@@ -585,6 +585,14 @@ public class ItemType {
 			Rarity.RARE,
 			null,
 			null) {
+		@Override
+		public int getValue(List<ItemEffect> effects) {
+			int val = super.getValue(effects);
+			
+			val += (effects.size() * 25);
+			
+			return val;
+		}
 		@Override
 		public boolean isTransformative() {
 			return false;
@@ -605,7 +613,7 @@ public class ItemType {
 		}
 	};
 	
-	public static AbstractItemType ELIXIR = new AbstractItemType(1500,
+	public static AbstractItemType ELIXIR = new AbstractItemType(750,
 			"",
 			false,
 			"elixir",
@@ -619,6 +627,14 @@ public class ItemType {
 			Rarity.EPIC,
 			null,
 			null) {
+		@Override
+		public int getValue(List<ItemEffect> effects) {
+			int val = super.getValue(effects);
+			
+			val += (effects.size() * 50);
+			
+			return val;
+		}
 		@Override
 		public boolean isTransformative() {
 			return true;
@@ -2727,19 +2743,19 @@ public class ItemType {
 					String raceKnowledgeGained = "";
 					if(target.isPlayer()) {
 						if(s == Spell.ELEMENTAL_EARTH) {
-							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_EARTH, true);
+							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_EARTH, null, true);
 							
 						} else if(s == Spell.ELEMENTAL_WATER) {
-							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_WATER, true);
+							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_WATER, null, true);
 							
 						} else if(s == Spell.ELEMENTAL_AIR) {
-							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_AIR, true);
+							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_AIR, null, true);
 							
 						} else if(s == Spell.ELEMENTAL_FIRE) {
-							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_FIRE, true);
+							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_FIRE, null, true);
 							
 						} else if(s == Spell.ELEMENTAL_ARCANE) {
-							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_ARCANE, true);
+							raceKnowledgeGained = getBookEffect(target, Subspecies.ELEMENTAL_ARCANE, null, true);
 						}
 					}
 					
@@ -2857,6 +2873,8 @@ public class ItemType {
 				case DARK_SIREN_SIRENS_CALL:
 				case LIGHTNING_SPHERE_DISCHARGE:
 				case LIGHTNING_SPHERE_OVERCHARGE:
+				case ARCANE_CHAIN_LIGHTNING:
+				case ARCANE_LIGHTNING_SUPERBOLT:
 					break;
 			}
 			
@@ -3014,18 +3032,6 @@ public class ItemType {
 			subspeciesLoreMap.get(sub.getAdvancedDescriptionId()).add(sub);
 		}
 		
-//		for(Entry<String, List<AbstractSubspecies>> entry : subspeciesLoreMap.entrySet()) {
-//			AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
-//											?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
-//											:entry.getValue().get(0);
-//			
-//			AbstractItemEffectType bookType = generateBookEffect(mainSubspecies);
-//			ItemEffectType.allEffectTypes.add(bookType);
-//			String id = "BOOK_READ_"+mainSubspecies.toString();
-//			ItemEffectType.itemEffectTypeToIdMap.put(bookType, id);
-//			ItemEffectType.idToItemEffectTypeMap.put(id, bookType);
-//		}
-		
 		for(Entry<String, List<AbstractSubspecies>> entry : subspeciesLoreMap.entrySet()) {
 			AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
 											?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
@@ -3052,7 +3058,7 @@ public class ItemType {
 					String id = "BOOK_READ_"+Subspecies.getIdFromSubspecies(mainSubspecies);
 					
 					if(!ItemEffectType.idToItemEffectTypeMap.containsKey(id)) {
-						AbstractItemEffectType bookType = generateBookEffect(mainSubspecies);
+						AbstractItemEffectType bookType = generateBookEffect(mainSubspecies, entry.getValue());
 						ItemEffectType.allEffectTypes.add(bookType);
 						ItemEffectType.itemEffectTypeToIdMap.put(bookType, id);
 						ItemEffectType.idToItemEffectTypeMap.put(id, bookType);
@@ -3196,11 +3202,10 @@ public class ItemType {
 						null,
 						Rarity.EPIC,
 						Util.newArrayListOfValues(new ItemEffect(effectType)),
-						Util.newArrayListOfValues(ItemTag.ESSENCE)) {
-						// TODO revisit this and potentially make demon/angel essence contraband when adding more essence effects
-//						((mainSubspecies.getSubspeciesOverridePriority()>=5) // Half-Demon+ (and Angels) are contraband
-//								?Util.newArrayListOfValues(ItemTag.ESSENCE,ItemTag.CONTRABAND_HEAVY)
-//								:Util.newArrayListOfValues(ItemTag.ESSENCE)))
+						(((mainSubspecies.getRace()==Race.DEMON && mainSubspecies.getSubspeciesOverridePriority()>5) || mainSubspecies.getRace()==Race.ANGEL) // Demon+ (and Angels) are contraband
+								?Util.newArrayListOfValues(ItemTag.ESSENCE, ItemTag.CONTRABAND_HEAVY)
+								:Util.newArrayListOfValues(ItemTag.ESSENCE))) {
+						
 					@Override
 					public String getUseName() {
 						return "absorb";
@@ -3228,14 +3233,14 @@ public class ItemType {
 		}
 	}
 	
-	private static AbstractItemEffectType generateBookEffect(AbstractSubspecies subspecies) {
+	private static AbstractItemEffectType generateBookEffect(AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies) {
 		return new AbstractItemEffectType(Util.newArrayListOfValues(
-				"Adds "+subspecies.getName(null)+" encyclopedia entry.",
-				"[style.boldExcellent(+10)] <b style='color:"+subspecies.getColour(null).toWebHexString()+";'>"+subspecies.getDamageMultiplier().getName()+"</b>"),
-				subspecies.getColour(null)) {
+				"Adds "+mainSubspecies.getName(null)+" encyclopedia entry.",
+				"[style.boldExcellent(+10)] <b style='color:"+mainSubspecies.getColour(null).toWebHexString()+";'>"+mainSubspecies.getDamageMultiplier().getName()+"</b>"),
+				mainSubspecies.getColour(null)) {
 			@Override
 			public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
-				return getBookEffect(target, subspecies, true);
+				return getBookEffect(target, mainSubspecies, additionalUnlockSubspecies, true);
 			}
 		};
 	}

@@ -42,10 +42,10 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.GenderNames;
@@ -114,6 +114,7 @@ import com.lilithsthrone.utils.time.DayPeriod;
 import com.lilithsthrone.utils.time.SolarElevationAngle;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
+import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
 
@@ -496,9 +497,18 @@ public class MainController implements Initializable {
 						checkLastKeys();
 						
 						if(event.getCode()==KeyCode.END && Main.DEBUG){
-							Main.game.getPlayer().incrementPerkCategoryPoints(PerkCategory.PHYSICAL, 1);
-							Main.game.getPlayer().incrementPerkCategoryPoints(PerkCategory.ARCANE, 1);
-							Main.game.getPlayer().incrementPerkCategoryPoints(PerkCategory.LUST, 1);
+							for(NPC npc : Main.game.getAllNPCs()) {
+								if(npc.isUnique() && !npc.hasArtwork()
+//										&& (npc.getWorldLocation().getWorldRegion()==WorldRegion.DOMINION)
+										&& npc.isFeminine()
+										&& npc.getFaceType().getBodyCoveringType(npc).getCategory()==BodyCoveringCategory.MAIN_SKIN
+										) {
+									System.out.println(npc.getNameIgnoresPlayerKnowledge() + " "+npc.getClass().getName());// + " " + npc.getSurname());
+								}
+							}
+//							Main.game.getPlayer().incrementPerkCategoryPoints(PerkCategory.PHYSICAL, 1);
+//							Main.game.getPlayer().incrementPerkCategoryPoints(PerkCategory.ARCANE, 1);
+//							Main.game.getPlayer().incrementPerkCategoryPoints(PerkCategory.LUST, 1);
 //							for(NPC npc : Main.game.getCharactersTreatingCellAsHome()) {
 //								System.out.println(npc.getNameIgnoresPlayerKnowledge()+npc.getClass().getName());
 //							}
@@ -674,13 +684,16 @@ public class MainController implements Initializable {
 						}
 						if(Main.game.getCurrentDialogueNode() == CompanionManagement.OCCUPANT_CHOOSE_NAME
 								|| Main.game.getCurrentDialogueNode() == ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_PERSONALITY
-								|| Main.game.getCurrentDialogueNode() == KaysWarehouse.KAY_OFFICE_DOMINATE_NAMING) {
+								|| Main.game.getCurrentDialogueNode() == KaysWarehouse.KAY_OFFICE_DOMINATE_NAMING
+								|| Main.game.getCurrentDialogueNode() == ElementalDialogue.ELEMENTAL_CHOOSE_NAME) {
 							
 							GameCharacter slave = Main.game.getDialogueFlags().getManagementCompanion();
 							if(Main.game.getCurrentDialogueNode() == ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_PERSONALITY) {
 								slave = BodyChanging.getTarget();
 							} else if(Main.game.getCurrentDialogueNode() == KaysWarehouse.KAY_OFFICE_DOMINATE_NAMING) {
 								slave = Main.game.getNpc(Kay.class);
+							} else if(Main.game.getCurrentDialogueNode() == ElementalDialogue.ELEMENTAL_CHOOSE_NAME) {
+								slave = Main.game.getPlayer().getElemental();
 							}
 							GameCharacter slaveFinal = slave;
 							
@@ -2675,6 +2688,8 @@ public class MainController implements Initializable {
 				} else {
 					if(Main.game.isInGlobalMap()) {
 						Main.game.getPlayer().setGlobalLocation(new Vector2i(location.getX() + xOffset, location.getY() + yOffset));
+					} else {
+						Main.game.getPlayer().setGlobalLocation(Main.game.getWorlds().get(WorldType.WORLD_MAP).getCell(Main.game.getPlayerCell().getType().getGlobalMapLocation()).getLocation());
 					}
 					Main.game.getPlayer().setLocation(new Vector2i(location.getX() + xOffset, location.getY() + yOffset));
 					
