@@ -1,11 +1,10 @@
 package com.lilithsthrone.game.dialogue.responses;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
 import java.util.Map.Entry;
 
+import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -19,6 +18,7 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.Lab;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexControl;
@@ -29,6 +29,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
 
 /**
  * @since 0.1.69
@@ -67,7 +68,7 @@ public class Response {
 	// For use when loaded from external files
 	
 	protected boolean fromExternalFile = false;
-	
+
 	private String conditional;
 	
 	private String colourId;
@@ -1066,4 +1067,142 @@ public class Response {
 	public void setEffectsString(String effectsString) {
 		this.effectsString = effectsString;
 	}
+
+	public void setFromExternalFile(boolean fromExternalFile) {
+		this.fromExternalFile = fromExternalFile;
+	}
+
+	public static void loadResponsesFromFile(File XMLFile) {
+		if (XMLFile.exists()) {
+			try {
+				Document doc = Main.getDocBuilder().parse(XMLFile);
+
+				// Cast magic:
+				doc.getDocumentElement().normalize();
+
+				Element coreElement = Element.getDocumentRootElement(XMLFile); // Loads the document and returns the root element - in Response files it's <responses>
+
+				for (Element node : coreElement.getAllOf("responses")) {
+
+					// Responses:
+
+					for (Element response : node.getAllOf("response")) {
+						String scene = response.getMandatoryFirstOf("scene").getTextContent();
+
+						String availabilityConditional = "true";
+						if (response.getOptionalFirstOf("availabilityConditional").isPresent()) {
+							availabilityConditional = response.getMandatoryFirstOf("availabilityConditional").getTextContent();
+						}
+
+						String index = response.getMandatoryFirstOf("index").getTextContent();
+
+						String responseTitle = response.getMandatoryFirstOf("responseTitle").getTextContent();
+						String responseTooltip = response.getMandatoryFirstOf("responseTooltip").getTextContent();
+
+						String nextDialogueId = "";
+						String defaultPlaceTypeForNextDialogue = "";
+						boolean stripContentForNextDialogue = false;
+						boolean forceContinueForNextDialogue = false;
+						if (response.getOptionalFirstOf("nextDialogue").isPresent()) {
+							nextDialogueId = response.getMandatoryFirstOf("nextDialogue").getTextContent();
+							defaultPlaceTypeForNextDialogue = response.getMandatoryFirstOf("nextDialogue").getAttribute("defaultPlaceType");
+							stripContentForNextDialogue = Boolean.parseBoolean(response.getMandatoryFirstOf("nextDialogue").getAttribute("stripContent"));
+							forceContinueForNextDialogue = Boolean.parseBoolean(response.getMandatoryFirstOf("nextDialogue").getAttribute("forceContinue"));
+						}
+						// Thanks, Java!
+						String finalDefaultPlaceTypeForNextDialogue = defaultPlaceTypeForNextDialogue;
+
+						String colourResponse = "";
+						if (response.getOptionalFirstOf("colour").isPresent()) {
+							colourResponse = response.getMandatoryFirstOf("colour").getTextContent();
+						}
+
+						String secondsPassedResponse = "";
+						boolean asMinutes = false;
+						if (response.getOptionalFirstOf("secondsPassed").isPresent()) {
+							secondsPassedResponse = response.getMandatoryFirstOf("secondsPassed").getTextContent();
+							asMinutes = Boolean.parseBoolean(response.getMandatoryFirstOf("secondsPassed").getAttribute("minutes"));
+						}
+
+						String effectsResponse = "";
+						if (response.getOptionalFirstOf("effects").isPresent()) {
+							effectsResponse = response.getMandatoryFirstOf("effects").getTextContent();
+						}
+
+						List<String> requiredFetishes = new ArrayList<>();
+						if (response.getOptionalFirstOf("requiredFetishes").isPresent()) {
+							for (Element fetish : response.getMandatoryFirstOf("requiredFetishes").getAllOf("fetish")) {
+								requiredFetishes.add(fetish.getTextContent());
+							}
+						}
+
+						String corruptionLevel = "";
+						if (response.getOptionalFirstOf("corruptionLevel").isPresent()) {
+							corruptionLevel = response.getMandatoryFirstOf("corruptionLevel").getTextContent();
+						}
+
+						String requiredFemininity = "";
+						if (response.getOptionalFirstOf("requiredFemininity").isPresent()) {
+							requiredFemininity = response.getMandatoryFirstOf("requiredFemininity").getTextContent();
+						}
+
+
+						List<String> requiredPerks = new ArrayList<>();
+						if (response.getOptionalFirstOf("requiredPerks").isPresent()) {
+							for (Element perk : response.getMandatoryFirstOf("requiredPerks").getAllOf("perk")) {
+								requiredPerks.add(perk.getTextContent());
+							}
+						}
+
+						List<String> subspeciesRequired = new ArrayList<>();
+						if (response.getOptionalFirstOf("requiredSubspecies").isPresent()) {
+							for (Element subspecies : response.getMandatoryFirstOf("requiredSubspecies").getAllOf("subspecies")) {
+								subspeciesRequired.add(subspecies.getTextContent());
+							}
+						}
+
+						// Normal response:
+						Response standardResponse = new Response(responseTitle,
+								responseTooltip,
+								nextDialogueId,
+								secondsPassedResponse,
+								asMinutes,
+								colourResponse,
+								effectsResponse,
+								requiredFetishes,
+								corruptionLevel,
+								requiredPerks,
+								requiredFemininity,
+								subspeciesRequired) {
+							@Override
+							public String getDefaultPlaceTypeForNextDialogue() {
+								return finalDefaultPlaceTypeForNextDialogue;
+							}
+						};
+						standardResponse.setConditional(availabilityConditional);
+						standardResponse.setStripContent(stripContentForNextDialogue);
+						standardResponse.setForceContinue(forceContinueForNextDialogue);
+						standardResponse.setFromExternalFile(true);
+
+						DialogueNode dialogueNode = Lab.LAB;
+
+						dialogueNode.moddedResponses = new HashMap<>();
+
+						//modded response is always on the default response tab
+						dialogueNode.moddedResponses.putIfAbsent(0, new HashMap<>());
+						dialogueNode.moddedResponses.get(0).putIfAbsent(index, new ArrayList<>());
+						dialogueNode.moddedResponses.get(0).get(index).add(standardResponse);
+					}
+
+				}
+			} catch(Exception ex){
+				ex.printStackTrace();
+				System.err.println("Response was unable to be loaded from file! (" + XMLFile.getName() + ")\n" + ex);
+			}
+
+		} else {
+			System.err.println("Response file does not exist! (" + XMLFile.getName() + ")");
+		}
+	}
+
 }

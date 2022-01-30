@@ -2841,8 +2841,8 @@ public class Game implements XMLSaving {
 		}
 		informationTooltips = new HashMap<>();
 		
-		Response response = currentDialogueNode.getResponse(responseTab, index);
-		
+		Response response = currentDialogueNode.getResponsePlus(responseTab, index);
+
 		if (response != null) {
 			String corruptionGains = "";
 			if(response.isActionCorrupting() && !response.isAvailableFromFetishes()) {
@@ -3405,7 +3405,7 @@ public class Game implements XMLSaving {
 		responsePointer=responsePage*MainController.RESPONSE_COUNT;
 		
 		for (int i=responsePage*MainController.RESPONSE_COUNT; i<responsePage*MainController.RESPONSE_COUNT+(MainController.RESPONSE_COUNT-1); i++) {
-			if(currentDialogueNode.getResponse(responseTab, i) != null) {
+			if(currentDialogueNode.getResponsePlus(responseTab, i) != null) {
 				responsePointer = i;
 				break;
 			}
@@ -3414,7 +3414,7 @@ public class Game implements XMLSaving {
 	
 	private void checkForResponsePage() {
 		for (int i = responsePage*MainController.RESPONSE_COUNT; i<responsePage*MainController.RESPONSE_COUNT+(MainController.RESPONSE_COUNT-1); i++) {
-			if(currentDialogueNode.getResponse(responseTab, i) != null) {
+			if(currentDialogueNode.getResponsePlus(responseTab, i) != null) {
 				return;
 			}
 		}
@@ -3532,7 +3532,7 @@ public class Game implements XMLSaving {
 		Response response;
 		if (responsePage == 0) {
 			for (int i = 1; i < MainController.RESPONSE_COUNT; i++) {
-				response = node.getResponse(responseTab, i);
+				response = node.getResponsePlus(responseTab, i);
 				if (response != null) {
 					choicesDialogueSB.append(getResponseBoxDiv(response, i));
 				} else
@@ -3540,7 +3540,7 @@ public class Game implements XMLSaving {
 												+ "<b class='hotkey-icon disabled'>" + getResponseHotkey(i) + "</b>"
 											+ "</div>");
 			}
-			response = node.getResponse(responseTab, 0);
+			response = node.getResponsePlus(responseTab, 0);
 			if (response != null) {
 				choicesDialogueSB.append(getResponseBoxDiv(response, 0));
 
@@ -3551,7 +3551,7 @@ public class Game implements XMLSaving {
 			
 		} else {
 			for (int i = 0; i < (MainController.RESPONSE_COUNT-1); i++) {
-				response = node.getResponse(responseTab, i + (responsePage * MainController.RESPONSE_COUNT));
+				response = node.getResponsePlus(responseTab, i + (responsePage * MainController.RESPONSE_COUNT));
 				if (response != null) {
 					choicesDialogueSB.append(getResponseBoxDiv(response, i + 1));
 				} else {
@@ -3560,7 +3560,7 @@ public class Game implements XMLSaving {
 											+ "</div>");
 				}
 			}
-			response = node.getResponse(responseTab, MainController.RESPONSE_COUNT-1 + (responsePage * MainController.RESPONSE_COUNT));
+			response = node.getResponsePlus(responseTab, MainController.RESPONSE_COUNT-1 + (responsePage * MainController.RESPONSE_COUNT));
 			if (response != null) {
 				choicesDialogueSB.append(getResponseBoxDiv(response, 0));
 			} else {
@@ -3572,7 +3572,7 @@ public class Game implements XMLSaving {
 		}
 		choicesDialogueSB.append("</div>");
 		
-		if (node.getResponse(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null){
+		if (node.getResponsePlus(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null){
 			choicesDialogueSB.append("<div class='response-switcher right' id='switch_right'><b class='hotkey-icon'>"
 					+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE) == null ? "" : Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE).getFullName()) + "</b>" + "&#62</div>");
 			
@@ -3590,7 +3590,7 @@ public class Game implements XMLSaving {
 	
 	private boolean isResponseTabEmpty(DialogueNode node, int responseTab) {
 		for (int i = 1; i < MainController.RESPONSE_COUNT; i++) {
-			if(node.getResponse(responseTab, i)!=null) {
+			if(node.getResponsePlus(responseTab, i)!=null) {
 				return false;
 			}
 		}
@@ -4942,7 +4942,7 @@ public class Game implements XMLSaving {
 	}
 
 	public boolean isHasNextResponsePage() {
-		return currentDialogueNode.getResponse(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null;
+		return currentDialogueNode.getResponsePlus(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null;
 	}
 
 	public int getResponseTab() {

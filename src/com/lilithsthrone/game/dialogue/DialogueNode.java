@@ -41,6 +41,8 @@ public abstract class DialogueNode {
 	
 	private boolean travelDisabled;
 	private boolean continuesDialogue;
+
+	public Map<Integer, Map<String, List<Response>>> moddedResponses;
 	
 	public DialogueNode(String label, String description, boolean travelDisabled) {
 		this(label, description, travelDisabled, false);
@@ -762,7 +764,7 @@ public abstract class DialogueNode {
 	public boolean isDisplaysActionTitleOnContinuesDialogue() {
 		return true;
 	}
-	
+
 	/**
 	 * Index starts at 0.
 	 * @return The title to be displayed on the response tab. Only indices that are defined as returning a title are displayed, so just return null as the fallback option.
@@ -770,7 +772,21 @@ public abstract class DialogueNode {
 	public String getResponseTabTitle(int index) {
 		return null;
 	}
-	
+
+	/**
+	 * The (modded) responses that lead on from this dialogue node.
+	 * @param responseTab The tab in which the response is to be found.
+	 * @param index The index of the response.
+	 * @return A regular response, or the modded response if present.
+	 */
+	public Response getResponsePlus(int responseTab, int index) {
+		Response response = getResponse(responseTab, index);
+		if (response == null && moddedResponses != null) {
+			response = getModdedResponse(responseTab, index);
+		}
+		return response;
+	};
+
 	/**
 	 * The responses that lead on from this dialogue node.
 	 * @param responseTab The tab in which the response is to be found.
@@ -828,5 +844,27 @@ public abstract class DialogueNode {
 		if(Main.game.isStarted()) {
 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired, false);
 		}
+	}
+
+	/**
+	 * The modded responses that lead on from this dialogue node.
+	 * @param responseTab The tab in which the response is to be found.
+	 * @param index The index of the response.
+	 * @return A response, if a response is returned at the specified responseTab & index, or, if not, then null.
+	 */
+	public Response getModdedResponse(int responseTab, int index) {
+		if(moddedResponses.containsKey(responseTab)) {
+			for (Entry<String, List<Response>> entry : moddedResponses.get(responseTab).entrySet()) {
+				int parsedIndex = Integer.parseInt(UtilText.parse(entry.getKey()).trim());
+				if (parsedIndex == index) {
+					for (Response response : entry.getValue()) {
+						if (response.isAvailableFromConditional()) {
+							return response;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 }

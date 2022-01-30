@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.places.submission.LyssiethPalaceDialogue;
+import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
@@ -84,8 +85,8 @@ public class DialogueManager {
 		allDialogues.add(CosmeticsDialogue.BEAUTICIAN_START);
 		dialogueToIdMap.put(CosmeticsDialogue.BEAUTICIAN_START, id);
 		idToDialogueMap.put(id, CosmeticsDialogue.BEAUTICIAN_START);
-		
-		
+
+
 		// Modded dialogue types:
 		
 		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/dialogue");
@@ -131,6 +132,22 @@ public class DialogueManager {
 				}
 			}
 		}
+
+		Map<String, Map<String, File>> moddedFilesMapResponses = Util.getExternalModFilesById("/responses");
+		for(Entry<String, Map<String, File>> entry : moddedFilesMapResponses.entrySet()) {
+			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
+				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("responses")) {
+					try {
+						Response.loadResponsesFromFile(innerEntry.getValue());
+					} catch(Exception ex) {
+						System.err.println("Loading responses failed. File path: "+innerEntry.getValue().getAbsolutePath());
+						System.err.println("Actual exception: ");
+						ex.printStackTrace(System.err);
+					}
+				}
+			}
+		}
+
 	}
 	
 }
