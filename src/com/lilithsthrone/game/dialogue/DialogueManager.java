@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.npcDialogue.QuickTransformations;
 import com.lilithsthrone.game.dialogue.npcDialogue.offspring.GenericOffspringDialogue;
@@ -16,12 +8,16 @@ import com.lilithsthrone.game.dialogue.places.dominion.harpyNests.HarpyNestDomin
 import com.lilithsthrone.game.dialogue.places.dominion.harpyNests.HarpyNestNympho;
 import com.lilithsthrone.game.dialogue.places.submission.LyssiethPalaceDialogue;
 import com.lilithsthrone.game.dialogue.places.submission.dicePoker.DicePoker;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.responses.Response;
+import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Handles the loading and id generation of DialogueNodes from external files.
