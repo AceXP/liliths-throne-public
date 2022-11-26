@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dialogueNodes>
+
+    <scene id ="intro">
+        <author><![CDATA[AceXp]]></author>
+        <preParsingEffects><![CDATA[
+			[#flags.setFlag(FLAG_acexp_elis_trader_found, true)]
+		]]></preParsingEffects>
+        <content folderPath="txt/acexp/elis/elis_trader">INTRO</content>
+        <secondsPassed minutes="true"><![CDATA[5]]></secondsPassed>
+        <continuesDialogue>false</continuesDialogue>
+        <travelDisabled>true</travelDisabled>
+        <inventoryDisabled>true</inventoryDisabled>
+        <regenerationDisabled>false</regenerationDisabled>
+        <responseTabs/>
+        <responses>
+            <response>
+                <availabilityConditional><![CDATA[
+					[#pc.getMoney()<10000]
+                ]]></availabilityConditional>
+                <responseTabIndex><![CDATA[0]]></responseTabIndex>
+                <index><![CDATA[1]]></index>
+                <responseTitle><![CDATA[Go for it ([style.moneyFormatUncoloured(10000, span)])]]></responseTitle>
+                <responseTooltip><![CDATA[
+					You can't afford to pay Angel that kind of money right now...
+                ]]></responseTooltip>
+                <nextDialogue><![CDATA[null]]></nextDialogue>
+                <effects/>
+            </response>
+            <response>
+                <availabilityConditional><![CDATA[
+					[#pc.getMoney()>=10000]
+                ]]></availabilityConditional>
+                <responseTabIndex><![CDATA[0]]></responseTabIndex>
+                <index><![CDATA[1]]></index>
+                <responseTitle><![CDATA[Go for it ([style.moneyFormat(10000, span)])]]></responseTitle>
+                <responseTooltip><![CDATA[
+					You just can't say no and happily pay the ten thousand flames which Angel is asking of you in order to have sex with her.
+                ]]></responseTooltip>
+                <nextDialogue/>
+                <secondsPassed minutes="true"><![CDATA[2]]></secondsPassed>
+                <effects><![CDATA[
+					[#game.appendToTextEndStringBuilder(pc.incrementMoney(-10000))]
+					[#flags.setFlag(FLAG_acexp_angel_daily_sex, true)]
+				]]></effects>
+                <requiredFetishes/>
+                <corruptionLevel><![CDATA[TWO_HORNY]]></corruptionLevel>
+                <requiredPerks/>
+                <requiredFemininity/>
+                <requiredSubspecies/>
+                <tradingVariables/>
+                <combatVariables/>
+                <sexVariablesWithManager enabled="true">
+                    <id><![CDATA[acexp_angel_office]]></id>
+                    <startingPosition><![CDATA[STANDING]]></startingPosition>
+                    <dominants>
+                        <character>
+                            <id>pc</id>
+                            <slot><![CDATA[STANDING_STANDING_DOMINANT]]></slot>
+                        </character>
+                    </dominants>
+                    <submissives>
+                        <character>
+                            <id>angel</id>
+                            <slot><![CDATA[STANDING_PERFORMING_ORAL]]></slot>
+                        </character>
+                    </submissives>
+                    <dominantSpectators/>
+                    <submissiveSpectators/>
+                    <postSexDialogue><![CDATA[acexp_dominion_angel_office_after_sex]]></postSexDialogue>
+                    <sexStartContent folderPath="txt/acexp/dominion/angel_office">SEX_START</sexStartContent>
+                    <ongoingActionsAtStart/>
+                </sexVariablesWithManager>
+            </response>
+
+            <response>
+                <responseTabIndex><![CDATA[0]]></responseTabIndex>
+                <index><![CDATA[2]]></index>
+                <responseTitle><![CDATA[Refuse]]></responseTitle>
+                <responseTooltip><![CDATA[
+					#IF(pc.getMoney()<10000)
+						You simply can't afford to pay that kind of money to have sex with Angel, so have no option but to refuse her offer...
+					#ELSE
+						You're not willing to pay that kind of money to have sex with Angel, so decide to refuse her offer...
+					#ENDIF
+				]]></responseTooltip>
+                <nextDialogue><![CDATA[acexp_dominion_angel_office_leave]]></nextDialogue>
+                <effects><![CDATA[
+					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/acexp/dominion/angel_office', 'LEAVE'))]
+					[#pc.setNearestLocation(PLACE_TYPE_ANGELS_KISS_CORRIDOR)]
+				]]></effects>
+            </response>
+        </responses>
+    </scene>
+
+</dialogueNodes>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dialogue>
+
+    <!-- Spying on your aunt: -->
+
+    <htmlContent tag="INTRO"><![CDATA[
+	<p>
+		You find yourself walking down yet another of Elis's narrow passages, lined by the usual series of inset doorways, discarded trash, and questionable stains. This time, however, as you're turning a corner, you notice two strangers ahead acting suspiciously though they don't appear to have noticed you yet. One figure, draped in a trenchcoat and fedora, is lurking in the dark and from what you can tell seems to be waiting impatiently while the wolf-boy before them fidgets nervously.
+	</p>
+	]]></htmlContent>
+
+</dialogue>

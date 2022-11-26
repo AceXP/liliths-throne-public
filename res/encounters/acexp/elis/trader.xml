@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<encounterRoot>
+
+    <additionalPlaceTypeTriggers>
+        <placeType>innoxia_fields_elis_town_alley</placeType>
+    </additionalPlaceTypeTriggers>
+
+    <possibleEncounters>
+        <encounter>
+            <name><![CDATA[Mysterious trader]]></name>
+            <chanceToTrigger opportunisticEncounter="false"><![CDATA[
+   				#IF(!game.isStarted() || flags.hasFlag(FLAG_acexp_elis_trader_found))
+	        		0
+        		#ELSE
+                    10
+			    #ENDIF
+            ]]></chanceToTrigger>
+            <dialogueReturned><![CDATA[acexp_elis_elis_trader_intro]]></dialogueReturned>
+        </encounter>
+    </possibleEncounters>
+</encounterRoot>
