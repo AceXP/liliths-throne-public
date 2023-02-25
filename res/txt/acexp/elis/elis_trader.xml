@@ -5,7 +5,25 @@
 
     <htmlContent tag="INTRO"><![CDATA[
 	<p>
-		You find yourself walking down yet another of Elis's narrow passages, lined by the usual series of inset doorways, discarded trash, and questionable stains. This time, however, as you're turning a corner, you notice two strangers ahead acting suspiciously though they don't appear to have noticed you yet. One figure, draped in a trenchcoat and fedora, is lurking in the dark and from what you can tell seems to be waiting impatiently while the wolf-boy before them fidgets nervously.
+		You find yourself walking down yet another of Elis's narrow passages, lined by the usual series of inset doorways, discarded trash, and questionable stains. This time, however, as you're turning a corner, you notice two strangers ahead acting suspiciously though they don't appear to have noticed you yet. One figure, draped in a trench-coat and fedora, is lurking in the dark and from what you can tell seems to be waiting impatiently while the wolf-boy before them fidgets nervously.
+	</p>
+	]]></htmlContent>
+
+    <htmlContent tag="OBSERVE"><![CDATA[
+	<p>
+		It doesn't look like the usual mugging or solicitation attempt so, out of curiosity, you quickly hide behind a stack of crates to observe the situation. Peering from cover, you see the wolf-boy nervously adjusting the watch around his wrist. After a brief exchange he nods, handing a handful of flames to the other person adorned with a trench-coat and fedora. The mysterious figure takes the flames, counts them, and puts them somewhere deep in their coat before pulling something out and exchanging it. The wolf-boy quickly grabs whatever it is and hurries down the passage, vanishing behind a corner and into the twisting alleyways. Once he's gone, the trench-coat-clad person takes a furtive glance around as you duck back behind the crates. When you peek back around they're leaning against the wall, presumably awaiting another customer...
+	</p>
+	]]></htmlContent>
+
+    <htmlContent tag="CONFRONT"><![CDATA[
+	<p>
+		Curious as to what's going on you continue your way down the alley. Startled by the sound of your approach, the wolf-boy yelps, dropping a bag of flames and fleeing down the alley away from you and the stranger. Watching as their apparent customer vanishes around a corner the figure lets out a sigh before slowly crouching down and pocketing the flames on the floor. Even from this distance it's hard to make out their identity in the poor lighting as they turn to face you, arms crossed in silence, and lean against the nearby wall waiting to see what you want...
+	</p>
+	]]></htmlContent>
+
+    <htmlContent tag="LEAVE"><![CDATA[
+	<p>
+		Deciding it best to avoid them, you turn down a different passage, returning to the maze like alleyways of Elis.
 	</p>
 	]]></htmlContent>
 

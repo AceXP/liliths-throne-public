@@ -1,17 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dialogueNodes>
 
-    <scene id ="intro">
+    <scene id ="initial">
         <author><![CDATA[AceXp]]></author>
         <preParsingEffects><![CDATA[
 			[#flags.setFlag(FLAG_acexp_elis_trader_daily_interaction, true)]
 			[#var shadyDealerRnd = RND.nextInt(10)+1]
 
-            #IF(flags.hasSavedLong('AceXpElisTrader'))
-                [#game.setModdedCharacterParserTarget(flags.getSavedLong('AceXpElisTrader'), 'AceXpElisTrader')]
-            #ELSE
-                [#flags.setSavedLong('AceXpElisTrader', game.importModdedCharacter('res/characters/acexp/Elis_trader.xml', 'AceXpElisTrader'))]
-            #ENDIF
+            [#flags.setSavedLong('AceXpElisTrader', game.importModdedCharacter('res/characters/acexp/Elis_trader.xml', 'AceXpElisTrader'))]
+            [#AceXpElisTrader.setTrader(true)]
+            [#AceXpElisTrader.setItemTagsToBuy(Array(ITEM_TAG_CONTRABAND_LIGHT, ITEM_TAG_CONTRABAND_MEDIUM, ITEM_TAG_CONTRABAND_HEAVY))]
+   			[#AceXpElisTrader.clearNonEquippedInventory(false)];
+
+			[#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('dsg_hndcuffs_hndcuffs', false), RND.nextInt(2)+1, false, false)]
+			[#AceXpElisTrader.addWeapon(game.getItemGen().generateWeapon('dsg_eep_enbaton_enbaton'), RND.nextInt(2)+1, false, false)]
+
+   			#IF(shadyDealerRnd<=8)
+    		    [#AceXpElisTrader.addItem(game.getItemGen().generateItem('MUSHROOM'), RND.nextInt(5)+1, false, false)]
+    		#ENDIF
+   			#IF(RND.nextInt(10)<=7)
+    		    [#AceXpElisTrader.addItem(game.getItemGen().generateItem('innoxia_race_slime_biojuice_canister'), RND.nextInt(3)+1, false, false)]
+    		#ENDIF
+   			#IF(shadyDealerRnd<=6)
+		        [#AceXpElisTrader.addWeapon(game.getItemGen().generateWeapon('dsg_eep_pbweap_pbpistol'), RND.nextInt(1)+1, false, false)]
+		        [#AceXpElisTrader.addWeapon(game.getItemGen().generateWeapon('dsg_eep_taser_taser'), RND.nextInt(1)+1, false, false)]
+    		#ENDIF
+   			#IF(shadyDealerRnd<=4)
+		        [#AceXpElisTrader.addWeapon(game.getItemGen().generateWeapon('dsg_eep_riotshield_riotshield'), RND.nextInt(1)+1, false, false)]
+		        [#AceXpElisTrader.addWeapon(game.getItemGen().generateWeapon('dsg_eep_pbweap_pbrifle'), 1, false, false)]
+    		#ENDIF
+   			#IF(shadyDealerRnd<=2)
+		        [#AceXpElisTrader.addWeapon(game.getItemGen().generateWeapon('innoxia_gun_revolver'), 1, false, false)]
+    		#ENDIF
+
+			[#AceXpElisTrader.setLocation(WORLD_TYPE_EMPTY, PLACE_TYPE_GENERIC_HOLDING_CELL, true)]
+		]]></preParsingEffects>
+        <content folderPath="txt/acexp/elis/elis_trader">INTRO</content>
+        <secondsPassed minutes="true"><![CDATA[5]]></secondsPassed>
+        <continuesDialogue>false</continuesDialogue>
+        <travelDisabled>true</travelDisabled>
+        <inventoryDisabled>true</inventoryDisabled>
+        <regenerationDisabled>false</regenerationDisabled>
+        <responseTabs/>
+        <responses>
+            <response>
+                <responseTabIndex><![CDATA[0]]></responseTabIndex>
+                <index><![CDATA[1]]></index>
+                <responseTitle><![CDATA[Observe]]></responseTitle>
+                <responseTooltip><![CDATA[Find out what is going on...]]></responseTooltip>
+                <nextDialogue><![CDATA[acexp_elis_elis_trader_trade]]></nextDialogue>
+                <effects><![CDATA[
+					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/acexp/elis/elis_trader', 'OBSERVE'))]
+				]]></effects>
+            </response>
+            <response>
+                <responseTabIndex><![CDATA[0]]></responseTabIndex>
+                <index><![CDATA[2]]></index>
+                <responseTitle><![CDATA[Confront]]></responseTitle>
+                <responseTooltip><![CDATA[Just continue on your way.]]></responseTooltip>
+                <nextDialogue><![CDATA[acexp_elis_elis_trader_trade]]></nextDialogue>
+                <effects><![CDATA[
+					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/acexp/elis/elis_trader', 'CONFRONT'))]
+				]]></effects>
+            </response>
+            <response>
+                <responseTabIndex><![CDATA[0]]></responseTabIndex>
+                <index><![CDATA[0]]></index>
+                <responseTitle><![CDATA[Leave]]></responseTitle>
+                <responseTooltip><![CDATA[It's probably best to ignore this...]]></responseTooltip>
+                <nextDialogue stripContent="false"><![CDATA[default]]></nextDialogue>
+                <effects><![CDATA[
+					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/acexp/elis/elis_trader', 'LEAVE'))]
+				]]></effects>
+            </response>
+        </responses>
+    </scene>
+
+    <scene id ="repeat">
+        <author><![CDATA[AceXp]]></author>
+        <preParsingEffects><![CDATA[
+			[#flags.setFlag(FLAG_acexp_elis_trader_daily_interaction, true)]
+			[#var shadyDealerRnd = RND.nextInt(10)+1]
+
+            [#game.setModdedCharacterParserTarget(flags.getSavedLong('AceXpElisTrader'), 'AceXpElisTrader')]
             [#AceXpElisTrader.setTrader(true)]
             [#AceXpElisTrader.setItemTagsToBuy(Array(ITEM_TAG_CONTRABAND_LIGHT, ITEM_TAG_CONTRABAND_MEDIUM, ITEM_TAG_CONTRABAND_HEAVY))]
    			[#AceXpElisTrader.clearNonEquippedInventory(false)];
@@ -58,7 +129,7 @@
 		                Find out what is going on...
 	                #ENDIF
                 ]]></responseTooltip>
-                <nextDialogue><![CDATA[acexp_dominion_shady_dealer_trade]]></nextDialogue>
+                <nextDialogue><![CDATA[acexp_elis_elis_trader_trade]]></nextDialogue>
                 <effects/>
             </response>
             <response>

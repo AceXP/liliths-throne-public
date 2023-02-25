@@ -24,6 +24,10 @@
 		<!-- Elizabeth: -->
 		<flag dailyReset="false">elizabeth_introduced</flag>
 		<flag resetHour="6">elizabeth_daily_meeting</flag>
-		
+
+	<!-- Elis: -->
+		<!-- Jen Li: -->
+		<flag dailyReset="false">elis_trader_discovered</flag>
+		<flag dailyReset="true">elis_trader_daily_interaction</flag>
 
 </dialogueFlags>

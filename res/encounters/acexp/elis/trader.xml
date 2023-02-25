@@ -9,13 +9,26 @@
         <encounter>
             <name><![CDATA[Mysterious trader]]></name>
             <chanceToTrigger opportunisticEncounter="false"><![CDATA[
-   				#IF(!game.isStarted() || flags.hasFlag(FLAG_acexp_elis_trader_found))
-	        		0
+   				#IF(game.isStarted() && !flags.hasSavedLong('AceXpElisTrader'))
+	        		10
         		#ELSE
-                    10
+                    0
 			    #ENDIF
             ]]></chanceToTrigger>
-            <dialogueReturned><![CDATA[acexp_elis_elis_trader_intro]]></dialogueReturned>
+            <dialogueReturned><![CDATA[acexp_elis_elis_trader_initial]]></dialogueReturned>
         </encounter>
     </possibleEncounters>
-</encounterRoot>
+
+    <possibleEncounters>
+        <encounter>
+            <name><![CDATA[Panda saleswoman]]></name>
+            <chanceToTrigger opportunisticEncounter="false"><![CDATA[
+   				#IF(game.isStarted() && flags.hasSavedLong('AceXpElisTrader'))
+	        		10
+        		#ELSE
+                    0
+			    #ENDIF
+            ]]></chanceToTrigger>
+            <dialogueReturned><![CDATA[acexp_elis_elis_trader_repeat]]></dialogueReturned>
+        </encounter>
+    </possibleEncounters></encounterRoot>
