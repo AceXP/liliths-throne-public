@@ -27,6 +27,7 @@ import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
+import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.places.dominion.DominionPlaces;
 import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.RoomPlayer;
@@ -471,20 +472,28 @@ public class NightlifeDistrict {
 		
 		@Override
 		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			
 			if(!isClubOpen(0)) {
 				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_DAY_STORM");
+					sb.append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_DAY_STORM"));
 				} else {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_DAY");
+					sb.append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_DAY"));
 				}
 				
 			} else {
 				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_NIGHT_STORM");
+					sb.append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_NIGHT_STORM"));
 				} else {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_NIGHT");
+					sb.append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_NIGHT"));
 				}
 			}
+			
+			if(Main.game.getDialogueFlags().hasFlag("innoxia_hannah_training_complete")) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "OUTSIDE_LIGHTS_OUT"));
+			}
+			
+			return sb.toString();
 		}
 
 		@Override
@@ -502,9 +511,17 @@ public class NightlifeDistrict {
 					};
 				}
 				
-			} else {
-				return null;
+			} else if(index==2 && Main.game.getDialogueFlags().hasFlag("innoxia_hannah_training_complete")) {
+				if(!Main.game.isHourBetween(18, 4)) {
+					return new Response("Lights Out", UtilText.parse("The bar, 'Lights Out', is currently closed. A sign by the entrance informs you that it's open from [unit.time(18)]-[unit.time(04)] every night."), null);
+					
+				} else {
+					return new Response("Lights Out",
+							"The bar, 'Lights Out', is currently open. You could enter if you wanted to.",
+							DialogueManager.getDialogueFromId("innoxia_places_dominion_nightlife_lights_out_exit_initial_entry"));
+				}
 			}
+			return null;
 		}
 	};
 
@@ -3584,11 +3601,38 @@ public class NightlifeDistrict {
 				return getEndResponse(index, 0);
 			}
 			
+			if(index==1) {
+				if(Main.game.getCurrentDialogueNode()==WATERING_HOLE_TOILETS_USE) {
+					return new Response("Toilet", "You're already using the toilet...", null);
+				}
+				return new Response("Toilet", "Use the toilet.", WATERING_HOLE_TOILETS_USE);
+				
+			} else if(index==2) {
+				if(Main.game.getCurrentDialogueNode()==WATERING_HOLE_TOILETS_WASH) {
+					return new Response("Wash", "You're already taking a wash...", null);
+				}
+				List<InventorySlot> washSlots = Util.newArrayListOfValues(InventorySlot.HEAD, InventorySlot.EYES, InventorySlot.MOUTH, InventorySlot.NECK, InventorySlot.HAIR, InventorySlot.FINGER, InventorySlot.HAND, InventorySlot.WRIST);
+				return new Response("Wash",
+						"Use the sinks to wash your hands and face."
+							+ "<br/>[style.italicsGood(This will clean your "+Util.inventorySlotsToParsedStringList(washSlots, Main.game.getPlayer())+", as well as any clothing worn in these slots.)]"
+							+ "<br/>[style.italicsMinorBad(This does <b>not</b> clean companions.)]",
+							WATERING_HOLE_TOILETS_WASH) {
+					@Override
+					public void effects() {
+						for(InventorySlot slot : washSlots) {
+							Main.game.getPlayer().removeDirtySlot(slot, true);
+							AbstractClothing c = Main.game.getPlayer().getClothingInSlot(slot);
+							if(c!=null) {
+								c.setDirty(Main.game.getPlayer(), false);
+							}
+						}
+					}
+				};
+				
+			}
+			
 			if(hasPartner()) {
-				if(index==1) {
-					return new Response("Toilet", "Use the toilet.", WATERING_HOLE_TOILETS_USE);
-					
-				} else if(index==2) {
+				if(index==3) {
 					if(!getPartner().isAttractedTo(Main.game.getPlayer())) {
 						return new Response("Stall sex",
 								UtilText.parse(getClubbersPresent(), "[npc.Name] is [style.colourBad(not attracted to you)], and so is unwilling to have sex with you..."),
@@ -3625,35 +3669,10 @@ public class NightlifeDistrict {
 							}
 						};
 					}
-					
-				} else {
-					return null;
 				}
 				
 			} else {
-				if(index==1) {
-					return new Response("Toilet", "Use the toilet.", WATERING_HOLE_TOILETS_USE);
-					
-				} else if(index==2) {
-					List<InventorySlot> washSlots = Util.newArrayListOfValues(InventorySlot.HEAD, InventorySlot.EYES, InventorySlot.MOUTH, InventorySlot.NECK, InventorySlot.HAIR, InventorySlot.FINGER, InventorySlot.HAND, InventorySlot.WRIST);
-					return new Response("Wash",
-							"Use the sinks to wash your hands and face."
-								+ "<br/>[style.italicsGood(This will clean your "+Util.inventorySlotsToParsedStringList(washSlots, Main.game.getPlayer())+", as well as any clothing worn in these slots.)]"
-								+ "<br/>[style.italicsMinorBad(This does <b>not</b> clean companions.)]",
-								WATERING_HOLE_TOILETS_WASH) {
-						@Override
-						public void effects() {
-							for(InventorySlot slot : washSlots) {
-								Main.game.getPlayer().removeDirtySlot(slot, true);
-								AbstractClothing c = Main.game.getPlayer().getClothingInSlot(slot);
-								if(c!=null) {
-									c.setDirty(Main.game.getPlayer(), false);
-								}
-							}
-						}
-					};
-					
-				} else if(index==3) {
+				if(index==3) {
 					boolean penisAvailable = Main.game.getPlayer().hasPenis() && Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.PENIS, true);
 					boolean vaginaAvailable = Main.game.getPlayer().hasVagina() && Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true);
 					
@@ -3677,25 +3696,6 @@ public class NightlifeDistrict {
 								"You can't get access to your genitals, so can't get serviced at a glory hole.",
 								null);
 					}
-//					
-//					if((Main.game.getPlayer().hasPenis() && Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.PENIS, true))
-//							|| (Main.game.getPlayer().hasVagina() && Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true))
-//							|| (!Main.game.getPlayer().hasPenis() && !Main.game.getPlayer().hasVagina() && Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.PENIS, true))) {
-//						return new Response("Glory hole (use)",
-//								"A couple of the toilet's stalls have glory holes in them. Step up to one and have the person on the other side service you.",
-//								WATERING_HOLE_TOILETS_GLORY_HOLE_USING_GET_READY) {
-//							@Override
-//							public void effects() {
-//								spawnSubGloryHoleNPC("stranger");
-//							}
-//						};
-//						
-//					} else {
-//						return new Response("Glory hole (use)",
-//								"You can't get access to your genitals, so can't get serviced at a glory hole.",
-//								null);
-//					}
-					
 					
 				} else if(index==4) {
 					if((Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true))
@@ -3717,12 +3717,15 @@ public class NightlifeDistrict {
 								null);
 					}
 					
+				} else if(index==5) {
+					if(Main.game.getCurrentDialogueNode()==WATERING_HOLE_TOILETS_POSTERS) {
+						return new Response("Posters", "You're already taking a look at the posters...", null);
+					}
+					return new Response("Posters", "Take a look at the posters.", WATERING_HOLE_TOILETS_POSTERS);
 					
 				}
-				else {
-					return null;
-				}
 			}
+			return null;
 		}
 	};
 	
@@ -4186,6 +4189,26 @@ public class NightlifeDistrict {
 					+ getClubberStatus(this.getSecondsPassed(), false);
 		}
 
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return WATERING_HOLE_TOILETS.getResponse(responseTab, index);
+		}
+	};
+
+	public static final DialogueNode WATERING_HOLE_TOILETS_POSTERS = new DialogueNode("Toilets", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public boolean isTravelDisabled() {
+			return isEndConditionMet(0);
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_POSTERS", getClubbersPresent())
+					+ getClubberStatus(this.getSecondsPassed(), false);
+		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			return WATERING_HOLE_TOILETS.getResponse(responseTab, index);

@@ -26,6 +26,7 @@ public enum ItemTag {
 	SOLD_BY_KATE, // Jewellery
 	SOLD_BY_FINCH, // BDSM and sex-related stuff
 	SOLD_BY_VICKY, // Weapons
+	SOLD_BY_EISEK, // Produce
 
 	// Items with these tags can randomly spawn in encounters in the commented area
 	// Please note that due to legacy issues, clothing and weapons only use the 'DOMINION_ALLEYWAY_SPAWN' tag to determine whether or not it can randomly spawn in any area.
@@ -45,8 +46,16 @@ public enum ItemTag {
 	BOOK,
 	GIFT,
 
-	DRINK, // All drink items should be tagged as such so that any future status effects can be easily associated with them
+	// These three all remove 'thirst quenched', 'thirst quenched (junk food)', and 'thirst quenched (quality food)' and then apply their related status effect
+	DRINK, // Drink items apply the 'thirst quenched' status effect upon use
+	DRINK_POOR, // Basic drink items apply the 'thirst quenched (basic)' status effect upon use
+	DRINK_QUALITY, // Quality drink items apply the 'thirst quenched (quality)' status effect upon use
+	
+	// These three all remove 'recently eaten', 'recently eaten (junk food)', and 'recently eaten (quality food)' and then apply their related status effect
 	FOOD, // Food items apply the 'recently eaten' status effect upon use
+	FOOD_POOR, // Junk food items apply the 'recently eaten (junk)' status effect upon use
+	FOOD_QUALITY, // Quality food items apply the 'recently eaten (quality)' status effect upon use
+	
 	ALCOHOLIC, // For easy detection of alcoholic items in some scenes
 	
 	// To mark consumables as containing caffeine, with the number representing the equivalent alcoholic level to be applied to spider-morphs
@@ -121,6 +130,7 @@ public enum ItemTag {
 	WEAPON_UNARMED, // Should be added to all weapons that should use unarmed damage calculations instead of melee
 	
 	DRESS, // For helping to generate clothing in CharacterUtils
+	SWIMWEAR, // For helping to generate clothing in CharacterUtils
 
 	PROVIDES_KEY( // The person who equips this clothing will get an unlock key, making the unsealing cost 0
 			Util.newArrayListOfValues(
@@ -197,6 +207,17 @@ public enum ItemTag {
 			false),
 	
 	// These 'FITS' tags are used to check for whether clothing is suitable for certain body parts. They should be pretty self-explanatory.
+	// Mouths (mouth clothing fits all mouth types by default, which is why there's no need for 'FITS_MUZZLES' or 'FITS_BEAKS'):
+	FITS_MUZZLES_EXCLUSIVE(
+			Util.newArrayListOfValues(
+					"[style.colourFeral(Only fits muzzles)]"),
+			false),
+	FITS_BEAKS_EXCLUSIVE(
+			Util.newArrayListOfValues(
+					"[style.colourFeral(Only fits beaks)]"),
+			false),
+	
+	// legs:
 	FITS_HOOFS_EXCLUSIVE(
 			Util.newArrayListOfValues(
 					"[style.colourFeral(Only fits hoofs)]"),
@@ -215,6 +236,7 @@ public enum ItemTag {
 					"[style.colourFeral(Fits talons)]"),
 			false),
 	
+	// Arms:
 	FITS_FEATHERED_ARM_WINGS_EXCLUSIVE(
 			Util.newArrayListOfValues(
 					"[style.colourTfGeneric(Only fits feathered arm-wings)]"),
@@ -239,7 +261,8 @@ public enum ItemTag {
 			Util.newArrayListOfValues(
 					"[style.colourTfGeneric(Fits arm-wings)]"),
 			false),
-	
+
+	// Bodies:
 	FITS_NON_BIPED_BODY_HUMANOID(
 			Util.newArrayListOfValues(
 					"[style.colourHuman(Fits humanoid parts of non-biped bodies)]"),
@@ -263,7 +286,8 @@ public enum ItemTag {
 	FITS_AVIAN_BODY(
 			Util.newArrayListOfValues(
 					"[style.colourTfGeneric(Only fits avian bodies)]"),false), //bird-taurs
-	
+
+	// Feral status:
 	// These tags are non-exclusive, so clothing with them can additionally be equipped by non-ferals:
 	FITS_FERAL_ALL_BODY(
 			Util.newArrayListOfValues(

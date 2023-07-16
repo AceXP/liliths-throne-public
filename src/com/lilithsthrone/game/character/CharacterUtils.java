@@ -905,7 +905,7 @@ public class CharacterUtils {
 		}
 
 		if(mother.isFeral()) { // Feral mothers always birth feral offspring. This is done after the genetics section to make sure that the feral offspring is not modified in an unintended manner (such as making them as tall as the father).
-			body.setFeral(mother.getSubspecies()); // Feral offspring should always be the race of the feral mother to avoid very odd birthings (e.g. elephants born from a wolf)
+			body.setFeral(linkedCharacter, mother.getSubspecies()); // Feral offspring should always be the race of the feral mother to avoid very odd birthings (e.g. elephants born from a wolf)
 //			body.setFeral(raceTakesAfter.isFeralConfigurationAvailable(body)
 //							?raceTakesAfter
 //							:mother.getSubspecies());
@@ -1341,13 +1341,15 @@ public class CharacterUtils {
 			body.updateCoverings(true, true, true, true);
 		}
 		
-		// Set breast rows based on preferences:
-		if(Main.getProperties().multiBreasts==0) {
-			body.getBreast().setRows(null, 1);
-			
-		} else if(Main.getProperties().multiBreasts==1) {
-			if(body.getTorsoType()==TorsoType.HUMAN) {
+		if(linkedCharacter==null || !linkedCharacter.isUnique()) { // Unique characters should always have the default number of breast rows
+			// Set breast rows based on preferences:
+			if(Main.getProperties().multiBreasts==0 || Main.getProperties().multiBreasts==1) {
 				body.getBreast().setRows(null, 1);
+				
+			} else if(Main.getProperties().multiBreasts==2) {
+				if(body.getTorsoType()==TorsoType.HUMAN) {
+					body.getBreast().setRows(null, 1);
+				}
 			}
 		}
 
@@ -1392,7 +1394,6 @@ public class CharacterUtils {
 	 * If you are wanting to change a newly-spawned NPC's body, then <b>you should consider using GameCharacter.setBody() instead</b>, as that method can also apply personality changes.
 	 */
 	public Body reassignBody(GameCharacter linkedCharacter, Body body, Gender startingGender, AbstractSubspecies species, RaceStage stage, boolean removeDemonOverride) {
-		
 		if(removeDemonOverride) {
 			body.setSubspeciesOverride(null);
 		}
@@ -1402,6 +1403,25 @@ public class CharacterUtils {
 		boolean hasVagina = startingGender.getGenderName().isHasVagina();
 		boolean hasPenis = startingGender.getGenderName().isHasPenis();
 		boolean hasBreasts = startingGender.getGenderName().isHasBreasts();
+		boolean[] virginities = null;
+		
+		// Save virginities to be restored after body reset:
+		if(linkedCharacter!=null) {
+			virginities = new boolean[] {
+				linkedCharacter.isAnalVirgin(),
+				linkedCharacter.isAssVirgin(),
+				linkedCharacter.isFaceVirgin(),
+				linkedCharacter.isNippleCrotchVirgin(),
+				linkedCharacter.isNippleVirgin(),
+				linkedCharacter.isPenisVirgin(),
+				linkedCharacter.isSecondUrethraVirgin(),
+				linkedCharacter.isSpinneretVirgin(),
+				linkedCharacter.isUrethraVirgin(),
+				linkedCharacter.isVaginaUrethraVirgin(),
+				linkedCharacter.isVaginaVirgin(),
+				linkedCharacter.hasHymen()
+			};
+		}
 		
 		body.setArm(new Arm((stage.isArmFurry()?startingBodyType.getArmType():ArmType.HUMAN), startingBodyType.getArmRows()));
 		
@@ -1550,6 +1570,21 @@ public class CharacterUtils {
 		
 		if(linkedCharacter!=null) {
 			linkedCharacter.postTransformationCalculation();
+		}
+
+		if(linkedCharacter!=null) {
+			linkedCharacter.setAnalVirgin(virginities[0]);
+			linkedCharacter.setAssVirgin(virginities[1]);
+			linkedCharacter.setFaceVirgin(virginities[2]);
+			linkedCharacter.setNippleCrotchVirgin(virginities[3]);
+			linkedCharacter.setNippleVirgin(virginities[4]);
+			linkedCharacter.setPenisVirgin(virginities[5]);
+			linkedCharacter.setSecondUrethraVirgin(virginities[6]);
+			linkedCharacter.setSpinneretVirgin(virginities[7]);
+			linkedCharacter.setUrethraVirgin(virginities[8]);
+			linkedCharacter.setVaginaUrethraVirgin(virginities[9]);
+			linkedCharacter.setVaginaVirgin(virginities[10]);
+			linkedCharacter.setHymen(virginities[11]);
 		}
 		
 		return body;
@@ -2608,6 +2643,12 @@ public class CharacterUtils {
 	public void addFetishes(GameCharacter character, AbstractFetish... exclusions) {
 		
 		List<AbstractFetish> availableFetishes = getAllowedFetishes(character);
+		// If player preference for a fetish is set to 'always', then always allow it to be added:
+		for(AbstractFetish fetish : Fetish.getAllFetishes()) {
+			if(Main.getProperties().fetishPreferencesMap.get(fetish)==FetishPreference.SIX_ALWAYS.getValue()) {
+				availableFetishes.add(fetish);
+			}
+		}
 		
 		// Remove existing fetishes and exclusions:
 		availableFetishes.removeAll(character.getFetishes(false));
@@ -2682,7 +2723,7 @@ public class CharacterUtils {
 
 		// Desires:
 		int[] posDesireProb = new int[] {1, 1, 2, 2, 2, 3, 3};
-		int[] negDesireProb = new int[] {3, 3, 4, 4, 4, 5, 5};
+		int[] negDesireProb = new int[] {2, 2, 3, 3, 3, 4, 4};
 		int numberOfPositiveDesires = Util.randomItemFrom(posDesireProb);
 		int numberOfNegativeDesires = Util.randomItemFrom(negDesireProb);
 		
@@ -2796,6 +2837,10 @@ public class CharacterUtils {
 		equipClothingFromOutfits(character, OutfitType.getAllOutfits(), outfitType, settings);
 	}
 
+	public void equipClothingFromOutfitType(GameCharacter character, OutfitType outfitType) {
+		equipClothingFromOutfits(character, OutfitType.getAllOutfits(), outfitType, EquipClothingSetting.getAllClothingSettings());
+	}
+
 	private void equipClothingFromOutfits(GameCharacter character, List<AbstractOutfit> availableOutfits, OutfitType outfitType, List<EquipClothingSetting> settings) {
 		Map<AbstractOutfit, Integer> weightedOutfits = new HashMap<>();
 		
@@ -2823,7 +2868,7 @@ public class CharacterUtils {
 				return;
 			} catch (XMLLoadException e) {
 				System.err.println("Outfit '"+outfit.getName()+"' could not be applied in CharacterUtils equipClothing(). Proceeding to randomly generate outfit...");
-//				e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		

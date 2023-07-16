@@ -511,6 +511,13 @@ public class MainController implements Initializable {
 						
 						if(event.getCode()==KeyCode.END && Main.DEBUG){
 							
+//							System.out.println("####");
+//							System.out.println(GenericOrgasms.GENERIC_ORGASM_CREAMPIE.isBaseRequirementsMet());
+//							System.out.println(Main.sex.getOrgasmActionsPlayer().contains(GenericOrgasms.GENERIC_ORGASM_SELF_FACE));
+//							System.out.println(Main.sex.getOrgasmActionsPlayer().contains(GenericOrgasms.GENERIC_ORGASM_CREAMPIE));
+							
+//							System.out.println(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
+							
 							// Testing genetics/inheritance:
 //							Main.game.getPlayer().guaranteePregnancyOnNextRoll();
 //							Main.game.getPlayer().rollForPregnancy(Main.game.getCharactersPresent().get(0), 100, true);
@@ -577,7 +584,9 @@ public class MainController implements Initializable {
 //								if(npc.isUnique() && !npc.hasArtwork()
 ////										&& (npc.getWorldLocation().getWorldRegion()==WorldRegion.DOMINION)
 ////										&& npc.isFeminine()
-////										&& npc.getFaceType().getBodyCoveringType(npc).getCategory()==BodyCoveringCategory.MAIN_SKIN
+//										&& npc.getFaceType().getBodyCoveringType(npc).getCategory()!=BodyCoveringCategory.MAIN_SKIN
+//										&& npc.isAbleToBeImpregnated()
+//										&& npc.isFeminine()
 ////										&& (npc.getClass().getName().contains("dominion.") || npc.getClass().getName().contains("submission."))
 //										) {
 //									System.out.println(npc.getNameIgnoresPlayerKnowledge() + " "+npc.getClass().getName().split(".npc.")[1]);// + " " + npc.getSurname());
@@ -1773,10 +1782,21 @@ public class MainController implements Initializable {
 	static void setInventoryPageRight(int i) {
 		String id = "INV_PAGE_RIGHT_"+i;
 		if (((EventTarget) document.getElementById(id)) != null) {
-			((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
-				RenderingEngine.setPageRight(i);
-				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-			}, false);
+			if(i!=5
+				|| (InventoryDialogue.getInventoryNPC()==null
+					?Main.game.getPlayer().getCell().getInventory().isAnyQuestItemPresent()
+					:InventoryDialogue.getInventoryNPC().isCarryingQuestItems())) {
+				((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+					RenderingEngine.setPageRight(i);
+					Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
+				}, false);
+			}
+			if(i==5) {
+				MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
+				MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
+				TooltipInformationEventListener el2 =  new TooltipInformationEventListener().setInformation("Unique Items", "");
+				MainController.addEventListener(MainController.document, id, "mouseenter", el2, false);
+			}
 		}
 	}
 	

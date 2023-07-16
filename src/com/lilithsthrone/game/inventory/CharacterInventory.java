@@ -527,7 +527,10 @@ public class CharacterInventory implements XMLSaving {
 				+ getUniqueClothingCount() - getUniqueQuestClothingCount()
 				+ getUniqueItemCount() - getUniqueQuestItemCount();
 	}
-	
+
+	/**
+	 * @return true if this inventory contains any unique clothing, weapons, or items.
+	 */
 	public boolean isAnyQuestItemPresent() {
 		return getUniqueQuestWeaponCount()>0 || getUniqueQuestClothingCount()>0 || getUniqueQuestItemCount()>0;
 	}
@@ -1838,7 +1841,8 @@ public class CharacterInventory implements XMLSaving {
 
 		// The supplied clothing cannot be displaced in this manner!
 		if (!displacementTypeFound) {
-			throw new IllegalArgumentException("The supplied clothing cannot be displaced in this manner!");
+			new IllegalArgumentException("The supplied clothing ("+clothing.getClothingType().getId()+") cannot be displaced in this manner ("+dt.getDescription()+")!").printStackTrace();
+			return false;
 		}
 
 		// Is able to be displaced!
