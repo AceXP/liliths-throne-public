@@ -23,7 +23,83 @@
 
     <htmlContent tag="LEAVE"><![CDATA[
 	<p>
-		Deciding it best to avoid them, you turn down a different passage, returning to the maze like alleyways of Elis.
+		Deciding it's best to avoid this for now, you turn down a different passage, returning to the maze like alleyways of Elis.
+	</p>
+	]]></htmlContent>
+
+    <htmlContent tag="TRADE"><![CDATA[
+	<p>
+		A feminine voice breaks the ice as the figure motions you over. [AceXpElisTrader.speech(You’re no enforcer, so, wanna buy something?)]
+		[pc.speech(Uh, sure, what’ve you got?)] you say, the saleswoman chuckling quietly. [AceXpElisTrader.speech(Figured…)]
+		[AceXpElisTrader.She] [AceXpElisTrader.verb(step)] out of the shadows revealing herself to be a [AceXpElisTrader.race]. Opening her trench-coat, [AceXpElisTrader.she] reveals a horde of wares hanging inside, as well as showing off her white t-shirt and blue-grey jeans, which hug her large breasts and plump thighs.
+	</p>
+	]]></htmlContent>
+
+    <!-- Medium Affection: “Appreciate you stopping by, see you around!” she says before leaving in the opposite direction. -->
+
+    <!-- High Affection: The panda-girl gives you a hug before saying “Always great to see you, PCNAME, be safe.” before she walks in the opposite direction, a pep in her step. -->
+    <htmlContent tag="TRADE_LEAVE"><![CDATA[
+	<p>
+        The [AceXpElisTrader.race] nods, wordlessly leaving in the opposite direction.
+	</p>
+	]]></htmlContent>
+
+    <!-- Medium Affection: She spots you, and goes to meet you half way, leaning against the wall while facing you “Ah, my favorite PCRACE, looking to buy something? Chat?” -->
+
+    <!-- High Affection: “Hey there, handsome/beautiful/cutie, always happy to see my favorite customer.” -->
+
+    <htmlContent tag="REPEAT"><![CDATA[
+	<p>
+		Walking through the maze-like alleyways, you turn a corner and spot the shady trench-coat-clad saleswoman leaning against a wall.
+		[AceXpElisTrader.She] calls out seeing you walk her way [AceXpElisTrader.speech(Hey, stranger, wanna buy something?)]
+	</p>
+	]]></htmlContent>
+
+    <htmlContent tag="TRADE_REPEAT"><![CDATA[
+	<p>
+        The [AceXpElisTrader.race] leans against the wall, awaiting your next move.
+	</p>
+	]]></htmlContent>
+
+    <!-- Medium Affection: You ask the panda-girl about herself and she scratches the back of her head. “Well, in my day job I also sell stuff, but the pay left me wanting and… My mentor at work showed me a way to make some extra flames that didn’t involve sucking dick, so here we are.” -->
+
+    <!-- High Affection: You ask Jen to tell you a little more about herself, and she flashes you a smile. “Weeell, let’s see… Believe or not, I’m just an arcane light fixture-saleswoman, wasn’t always of course. Used to be like everyone else in the alleys, I mugged people and sold my body to whoever would pay for it, but one day I met this old raven-morph guy. He taught me salesmanship and got me a job at the place he worked at. Eventually, he taught me how to sell less than legal goods. I also have him to thank for meeting you, too.” -->
+
+    <htmlContent tag="CHAT"><![CDATA[
+	<p>
+	    You ask the panda-girl about herself and she raises a hand. [AceXpElisTrader.speech(Listen, pal/lady, I exchange goods and flames, not personal information. Not to be rude, but, if you’re not here to buy something, I’m not interested.)]
+	</p>
+	]]></htmlContent>
+
+    <!-- Post Mugger Fight: You ask Jen where she gets her goods from, causing her to rub her nose briefly. “My mentor, mostly, I do the fieldwork for him now since he’s getting on in age, never asked where he gets the stuff, not my business I figure. As for everything else, it pays to have quick fingers.” she ends with a wink.-->
+    <htmlContent tag="GOODS"><![CDATA[
+	<p>
+        You ask the panda-girl where she gets her goods from and she raises an eyebrow then simply responds. [AceXpElisTrader.speech(A friend, and that’s all I’ll say.)]
+
+        You then decide to ask her about the legality of what she sells. [AceXpElisTrader.speech(You mean to ask if my dirt cheap sterility pills and second-hand watches are legal? Of course! What’s with these questions, you an informant or something?)]
+
+	</p>
+	]]></htmlContent>
+
+    <!-- Post Mugger Fight: SEX
+
+    You get a little bit closer to her and proposition Jen with having some fun, causing her to look away, briefly biting a nail, glancing at you.
+
+    “I try to separate my work and love life… But for my hero? I’ll make an exception.”
+
+    The panda-girl pulls you into a passionate kiss then takes your hand and leads you to a little recess in the alley, letting go of your hand she places one of her own on the wall. She pulls up her trench coat, biting her lip and giving a seductive look at you as she tucks a thumb into the waistband of jeans and panties, pulling them down, revealing her large white-furred ass.
+
+    “Gonna fuck me, handsome/beautiful/cutie? Or are you just gonna stare?”
+
+    You gladly step up behind her as your consider how to take her. -->
+
+
+    <htmlContent tag="SEX"><![CDATA[
+	<p>
+        You get a little bit closer to her and proposition the panda-girl with having some fun, causing her to raise an eyebrow.
+
+        [AceXpElisTrader.speech(Pal/Lady, I’m selling my stuff not myself, not to mention I don’t do my customers.)] Sensing some disappointment, she pats your shoulder. [AceXpElisTrader.speech(Sorry… Nothing personal.)]
+
 	</p>
 	]]></htmlContent>
 

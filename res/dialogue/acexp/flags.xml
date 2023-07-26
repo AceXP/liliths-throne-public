@@ -28,7 +28,6 @@
 
 	<!-- Elis: -->
 		<!-- Jen Li: -->
-		<flag dailyReset="false">elis_trader_discovered</flag>
 		<flag dailyReset="true">elis_trader_daily_interaction</flag>
 
 </dialogueFlags>

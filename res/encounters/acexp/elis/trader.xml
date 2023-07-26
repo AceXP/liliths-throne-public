@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <encounterRoot>
 
+    <!-- Not during daytime, can't look like an enforcer -->
     <additionalPlaceTypeTriggers>
         <placeType>innoxia_fields_elis_town_alley</placeType>
     </additionalPlaceTypeTriggers>
@@ -9,26 +10,33 @@
         <encounter>
             <name><![CDATA[Mysterious trader]]></name>
             <chanceToTrigger opportunisticEncounter="false"><![CDATA[
-   				#IF(game.isStarted() && !flags.hasSavedLong('AceXpElisTrader'))
-	        		10
-        		#ELSE
+                #IF(flags.hasSavedLong('AceXpElisTrader'))
                     0
+                #ELSE
+       				#IF(game.isDayTime() || pc.hasAnyEnforcerStatusEffect() || flags.hasFlag(FLAG_acexp_elis_trader_daily_interaction))
+	            		0
+            		#ELSE
+                        90
+			        #ENDIF
 			    #ENDIF
             ]]></chanceToTrigger>
             <dialogueReturned><![CDATA[acexp_elis_elis_trader_initial]]></dialogueReturned>
         </encounter>
-    </possibleEncounters>
 
-    <possibleEncounters>
         <encounter>
             <name><![CDATA[Panda saleswoman]]></name>
             <chanceToTrigger opportunisticEncounter="false"><![CDATA[
-   				#IF(game.isStarted() && flags.hasSavedLong('AceXpElisTrader'))
-	        		10
-        		#ELSE
+                #IF(!flags.hasSavedLong('AceXpElisTrader'))
                     0
-			    #ENDIF
+                #ELSE
+   				    #IF(game.isDayTime() || pc.hasAnyEnforcerStatusEffect() || flags.hasFlag(FLAG_acexp_elis_trader_daily_interaction))
+	        		    0
+        		    #ELSE
+                        90
+			        #ENDIF
+		        #ENDIF
             ]]></chanceToTrigger>
             <dialogueReturned><![CDATA[acexp_elis_elis_trader_repeat]]></dialogueReturned>
         </encounter>
-    </possibleEncounters></encounterRoot>
+    </possibleEncounters>
+</encounterRoot>

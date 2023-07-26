@@ -13,7 +13,7 @@
       <raceConcealed value="false"/>
       <level value="20"/>
       <ageAppearanceDifference value="-3"/>
-      <yearOfBirth value="1994"/>
+      <yearOfBirth value="2008"/>
       <monthOfBirth value="SEPTEMBER"/>
       <dayOfBirth value="10"/>
       <version value="0.4.6.9"/>
@@ -29,7 +29,7 @@
         <trait>SELFISH</trait>
         <trait>LEWD</trait>
       </personality>
-      <sexualOrientation value="GYNEPHILIC"/>
+      <sexualOrientation value="AMBIPHILIC"/>
       <obedience value="0.0"/>
       <genderIdentity value="F_V_B_FEMALE"/>
       <foughtPlayerCount value="0"/>
@@ -42,94 +42,33 @@
       <mana value="176.0"/>
       <areasKnownByCharacters>
         <area type="ASS">
-          <c>-1,HarpyBimbo</c>
-          <c>-1,HarpyDominant</c>
-          <c>-1,Nyan</c>
-          <c>-1,SupplierPartner</c>
           <c>-1,Bunny</c>
-          <c>-1,HarpyNympho</c>
-          <c>-1,Brax</c>
-          <c>-1,Kalahari</c>
-          <c>-1,ZaranixMaidKelly</c>
-          <c>-1,ZaranixMaidKatherine</c>
-          <c>-1,CandiReceptionist</c>
-          <c>-1,Amber</c>
-          <c>-1,SupplierLeader</c>
-          <c>-1,Zaranix</c>
         </area>
         <area type="ANUS">
-          <c>-1,HarpyBimbo</c>
-          <c>-1,HarpyDominant</c>
-          <c>-1,Nyan</c>
-          <c>-1,SupplierPartner</c>
           <c>-1,Bunny</c>
-          <c>-1,HarpyNympho</c>
-          <c>-1,Brax</c>
-          <c>-1,Kalahari</c>
-          <c>-1,ZaranixMaidKatherine</c>
-          <c>-1,CandiReceptionist</c>
-          <c>-1,Amber</c>
-          <c>-1,SupplierLeader</c>
-          <c>-1,Zaranix</c>
         </area>
         <area type="VAGINA">
-          <c>-1,HarpyBimbo</c>
-          <c>-1,HarpyDominant</c>
-          <c>-1,Nyan</c>
-          <c>-1,SupplierPartner</c>
           <c>-1,Bunny</c>
-          <c>-1,HarpyNympho</c>
-          <c>-1,Brax</c>
-          <c>-1,Kalahari</c>
-          <c>-1,ZaranixMaidKatherine</c>
-          <c>-1,CandiReceptionist</c>
-          <c>-1,Amber</c>
-          <c>-1,SupplierLeader</c>
-          <c>-1,Zaranix</c>
         </area>
         <area type="MOUND">
-          <c>-1,HarpyBimbo</c>
-          <c>-1,HarpyDominant</c>
-          <c>-1,Nyan</c>
-          <c>-1,SupplierPartner</c>
           <c>-1,Bunny</c>
-          <c>-1,HarpyNympho</c>
-          <c>-1,Brax</c>
-          <c>-1,Kalahari</c>
-          <c>-1,ZaranixMaidKelly</c>
-          <c>-1,ZaranixMaidKatherine</c>
-          <c>-1,CandiReceptionist</c>
-          <c>-1,Amber</c>
-          <c>-1,SupplierLeader</c>
-          <c>-1,Zaranix</c>
         </area>
         <area type="PENIS">
-          <c>-1,Amber</c>
-          <c>-1,Brax</c>
-          <c>-1,Zaranix</c>
         </area>
         <area type="BREASTS">
-          <c>-1,Nyan</c>
-          <c>-1,CandiReceptionist</c>
           <c>-1,Bunny</c>
-          <c>-1,Brax</c>
-          <c>-1,Kalahari</c>
         </area>
         <area type="MOUTH">
-          <c>-1,Nyan</c>
-          <c>-1,CandiReceptionist</c>
           <c>-1,Bunny</c>
-          <c>-1,Brax</c>
-          <c>-1,Kalahari</c>
         </area>
       </areasKnownByCharacters>
     </core>
     <locationInformation>
-      <worldLocation value="DOMINION"/>
-      <homeWorldLocation value="MUSEUM"/>
-      <location x="10" y="12"/>
-      <homeLocation x="2" y="0"/>
-      <globalLocation x="20" y="17"/>
+      <worldLocation value="EMPTY"/>
+      <homeWorldLocation value="GENERIC_HOLDING_CELL"/>
+      <location x="1" y="1"/>
+      <homeLocation x="1" y="1"/>
+      <globalLocation x="1" y="1"/>
     </locationInformation>
     <body>
       <bodyCore bodyMaterial="FLESH" bodySize="70" femininity="85" feral="false" genitalArrangement="NORMAL" height="170" muscle="30" piercedStomach="true" pubicHair="ZERO_NONE" subspecies="dsg_bear_subspecies_panda" takesAfterMother="true" version="0.4.6.9">
@@ -221,22 +160,12 @@
     </body>
     <characterInventory>
       <maxInventorySpace value="150"/>
-      <money value="62842"/>
-      <essenceCount value="991"/>
+      <money value="628"/>
+      <essenceCount value="99"/>
       <dirtySlots/>
-      <unlockKeyMap>
-        <character id="175,DominionSuccubusAttacker">
-          <slot id="NECK"/>
-        </character>
-        <character id="172,DominionAlleywayAttacker">
-          <slot id="NECK"/>
-        </character>
-        <character id="-1,Scarlett">
-          <slot id="PENIS"/>
-        </character>
-      </unlockKeyMap>
+      <unlockKeyMap/>
       <clothingEquipped>
-        <clothing enchantmentKnown="true" id="dsg_fedora_fedora" isDirty="false" name="fedora" sealed="false" slotEquippedTo="HEAD">
+        <clothing enchantmentKnown="true" id="dsg_shadydealer_fedora" isDirty="false" name="fedora" sealed="false" slotEquippedTo="HEAD">
           <colours>
             <colour i="0">CLOTHING_DESATURATED_BROWN_DARK</colour>
             <colour i="1">CLOTHING_BROWN_VERY_DARK</colour>
@@ -249,7 +178,7 @@
             <colour i="2">CLOTHING_BLACK</colour>
           </colours>
         </clothing>
-        <clothing enchantmentKnown="true" id="dsg_trenchcoat_trenchcoat" isDirty="false" name="trenchcoat" sealed="false" slotEquippedTo="TORSO_OVER">
+        <clothing enchantmentKnown="true" id="dsg_shadydealer_trenchcoat" isDirty="false" name="trenchcoat" sealed="false" slotEquippedTo="TORSO_OVER">
           <colours>
             <colour i="0">CLOTHING_DESATURATED_BROWN</colour>
             <colour i="1">CLOTHING_BROWN_DARK</colour>
@@ -308,9 +237,7 @@
           </colours>
         </clothing>
       </clothingEquipped>
-      <itemsInInventory>
-        <item colour="CLOTHING_STEEL" count="1" id="innoxia_quest_clothing_keys" name="clothing keys"/>
-      </itemsInInventory>
+      <itemsInInventory/>
     </characterInventory>
     <tattoos/>
     <attributes>
@@ -322,16 +249,8 @@
       <attribute type="SPELL_COST_MODIFIER" value="1.0"/>
     </attributes>
     <potionAttributes/>
-    <traits>
-      <perk type="RUNNER_2"/>
-      <perk type="COMBAT_REGENERATION"/>
-      <perk type="OBSERVANT"/>
-    </traits>
+    <traits/>
     <specialPerks>
-      <perk type="HARPY"/>
-      <perk type="DEMON"/>
-      <perk type="IMP"/>
-      <perk type="SPECIAL_PLAYER"/>
       <perk type="DOG_MORPH"/>
       <perk type="CAT_MORPH"/>
     </specialPerks>
@@ -339,124 +258,22 @@
       <perk row="1" type="PHYSICAL_BASE"/>
       <perk row="1" type="LEWD_KNOWLEDGE"/>
       <perk row="1" type="ARCANE_BASE"/>
-      <perk row="2" type="ARCANE_BOOST"/>
-      <perk row="2" type="PHYSIQUE_BOOST"/>
-      <perk row="2" type="OBSERVANT"/>
-      <perk row="3" type="ENERGY_BOOST"/>
-      <perk row="3" type="AURA_BOOST"/>
-      <perk row="3" type="SPELL_EFFICIENCY"/>
-      <perk row="3" type="PHYSICAL_DEFENCE"/>
-      <perk row="4" type="ENERGY_BOOST"/>
-      <perk row="4" type="AURA_BOOST"/>
-      <perk row="4" type="SPELL_EFFICIENCY"/>
-      <perk row="4" type="PHYSICAL_DEFENCE"/>
-      <perk row="5" type="RUNNER_2"/>
-      <perk row="5" type="ARCANE_COMBATANT"/>
-      <perk row="6" type="ARCANE_BOOST_MAJOR"/>
-      <perk row="6" type="PHYSIQUE_BOOST_MAJOR"/>
-      <perk row="7" type="ENERGY_BOOST"/>
-      <perk row="7" type="AURA_BOOST"/>
-      <perk row="7" type="SPELL_EFFICIENCY"/>
-      <perk row="8" type="ENERGY_BOOST"/>
-      <perk row="8" type="AURA_BOOST"/>
-      <perk row="8" type="SPELL_EFFICIENCY"/>
-      <perk row="8" type="PHYSICAL_DEFENCE"/>
-      <perk row="9" type="ENERGY_BOOST"/>
-      <perk row="9" type="SPELL_EFFICIENCY"/>
-      <perk row="9" type="PHYSICAL_DEFENCE"/>
-      <perk row="10" type="COMBAT_REGENERATION"/>
-      <perk row="11" type="PHYSIQUE_BOOST_MAJOR"/>
     </perks>
-    <knownSpells>
-      <spell type="ICE_SHARD"/>
-      <spell type="SLAM"/>
-      <spell type="FIREBALL"/>
-      <spell type="POISON_VAPOURS"/>
-      <spell type="ARCANE_AROUSAL"/>
-    </knownSpells>
-    <spellUpgrades>
-      <upgrade type="ICE_SHARD_1"/>
-      <upgrade type="ICE_SHARD_2"/>
-      <upgrade type="ICE_SHARD_3"/>
-    </spellUpgrades>
+    <knownSpells/>
+    <spellUpgrades/>
     <spellUpgradePoints/>
     <fetishes>
-      <f desire="4" o="true" xp="200">FETISH_DOMINANT</f>
-      <f desire="4" o="true" xp="200">FETISH_ORAL_RECEIVING</f>
-      <f desire="1">FETISH_EXHIBITIONIST</f>
-      <f desire="1">FETISH_FOOT_RECEIVING</f>
-      <f desire="1">FETISH_FOOT_GIVING</f>
-      <f desire="3">FETISH_BREASTS_SELF</f>
-      <f desire="1">FETISH_BIMBO</f>
-      <f desire="0">FETISH_MASOCHIST</f>
-      <f desire="0">FETISH_KINK_RECEIVING</f>
-      <f desire="0">FETISH_TRANSFORMATION_RECEIVING</f>
-      <f desire="0">FETISH_SIZE_QUEEN</f>
-      <f desire="0">FETISH_DENIAL_SELF</f>
-      <f desire="0">FETISH_SADIST</f>
-      <f desire="4" o="true" xp="200">FETISH_ORAL_RECEIVING</f>
-      <f desire="0">FETISH_NON_CON_SUB</f>
-      <f desire="0">FETISH_NON_CON_DOM</f>
-      <f desire="1">FETISH_TRANSFORMATION_GIVING</f>
-      <f desire="0">FETISH_PENIS_RECEIVING</f>
-      <f desire="1">FETISH_INCEST</f>
-      <f desire="1">FETISH_VOYEURIST</f>
-      <f desire="3" xp="200">FETISH_ORAL_GIVING</f>
-      <f desire="1">FETISH_LEG_LOVER</f>
-      <f desire="1">FETISH_CROSS_DRESSER</f>
-      <f desire="1">FETISH_STRUTTER</f>
-      <f desire="1">FETISH_SUBMISSIVE</f>
-      <f desire="0">FETISH_DENIAL</f>
-      <f desire="0">FETISH_CUM_ADDICT</f>
-      <f desire="0">FETISH_ANAL_RECEIVING</f>
-      <f desire="4" o="true" xp="200">FETISH_DOMINANT</f>
-      <f desire="1">FETISH_KINK_GIVING</f>
-      <f desire="1">FETISH_LACTATION_OTHERS</f>
-      <f desire="0">FETISH_PREGNANCY</f>
-      <f desire="3" xp="18">FETISH_DEFLOWERING</f>
-      <f desire="1">FETISH_LACTATION_SELF</f>
-      <f xp="30">FETISH_BREASTS_OTHERS</f>
-      <f xp="200">FETISH_VAGINAL_RECEIVING</f>
-      <f desire="4" o="true" xp="200">FETISH_DOMINANT</f>
-      <f xp="200">FETISH_VAGINAL_GIVING</f>
-      <f desire="4" o="true" xp="200">FETISH_ORAL_RECEIVING</f>
-      <f xp="200">FETISH_PENIS_GIVING</f>
-      <f desire="3" xp="200">FETISH_ORAL_GIVING</f>
-      <f xp="200">FETISH_PURE_VIRGIN</f>
-      <f desire="3" xp="18">FETISH_DEFLOWERING</f>
-      <f xp="200">FETISH_MASTURBATION</f>
-      <f xp="200">FETISH_ANAL_GIVING</f>
+      <f desire="4" o="true" xp="10">FETISH_DOMINANT</f>
+      <f desire="4" o="true" xp="10">FETISH_ORAL_RECEIVING</f>
+      <f desire="3" xp="10">FETISH_ORAL_GIVING</f>
     </fetishes>
-    <statusEffects>
-      <statusEffect lta="740740" sp="173940" sr="-1" type="COMPANIONS_LEAVING"/>
-      <statusEffect lta="740740" sp="173940" sr="-1" type="CORRUPTION_PERK_1"/>
-      <statusEffect lta="740740" sp="173940" sr="-1" type="AROUSAL_PERK_5"/>
-      <statusEffect lta="740740" sp="173940" sr="-1" type="SUBSPECIES_BONUS"/>
-      <statusEffect lta="740740" sp="173940" sr="-1" type="ORIENTATION_GYNEPHILIC"/>
-      <statusEffect lta="740740" sp="173940" sr="-1" type="PHYSIQUE_PERK_2"/>
-      <statusEffect lta="740740" sp="86490" sr="-1" type="INTELLIGENCE_PERK_1"/>
-      <statusEffect lta="740740" sp="90" sr="-1" type="LUST_PERK_1"/>
-      <statusEffect lta="740740" sp="90" sr="-1" type="WEATHER_CLEAR"/>
-    </statusEffects>
+    <statusEffects/>
     <knownMoves/>
     <equippedMoves>
       <move type="BASIC_STRIKE"/>
-      <move type="BASIC_ARCANE_STRIKE"/>
       <move type="BASIC_BLOCK"/>
-      <move type="SPELL_FIREBALL"/>
-      <move type="SPELL_ICE_SHARD"/>
-      <move type="SPELL_POISON_VAPOURS"/>
-      <move type="SPELL_SLAM"/>
-      <move type="SPELL_ARCANE_AROUSAL"/>
     </equippedMoves>
     <characterRelationships/>
-    <pregnancy littersGenerated="0" timeProgressedToFinalPregnancyStage="1">
-      <pregnancyReactions>
-        <id value="-1,Kruger"/>
-        <id value="-1,Sean"/>
-        <id value="-1,Sean"/>
-      </pregnancyReactions>
-    </pregnancy>
     <family>
       <motherId value=""/>
       <motherName value="???"/>
@@ -466,9 +283,9 @@
       <fatherName value="???"/>
       <fatherFemininity value="MASCULINE"/>
       <fatherSubspecies value="HUMAN"/>
-      <yearOfConception value="1997"/>
-      <monthOfConception value="JULY"/>
-      <dayOfConception value="19"/>
+      <yearOfConception value="1994"/>
+      <monthOfConception value="SEPTEMBER"/>
+      <dayOfConception value="1"/>
     </family>
     <companions>
       <companionsFollowing/>
@@ -514,134 +331,5 @@
       <addictions/>
       <psychoactiveFluids/>
     </addictionsCore>
-    <playerSpecific>
-      <title value="The Human"/>
-      <karma value="0"/>
-      <questUpdates/>
-      <mainQuestUpdated value="false"/>
-      <sideQuestUpdated value="false"/>
-      <relationshipQuestUpdated value="false"/>
-      <raceBooksDiscovered>
-        <race>DEMON</race>
-        <race>HALF_DEMON</race>
-        <race>DOG_MORPH</race>
-        <race>HARPY</race>
-        <race>IMP</race>
-        <race>CAT_MORPH</race>
-      </raceBooksDiscovered>
-      <charactersEncountered>
-        <id value="-1,Amber"/>
-        <id value="-1,Angel"/>
-        <id value="-1,Arthur"/>
-        <id value="-1,Ashley"/>
-        <id value="-1,Axel"/>
-        <id value="-1,Brax"/>
-        <id value="-1,HarpyBimbo"/>
-        <id value="-1,Bunny"/>
-        <id value="-1,CandiReceptionist"/>
-        <id value="-1,Claire"/>
-        <id value="-1,Sean"/>
-        <id value="-1,HarpyDominant"/>
-        <id value="-1,Elizabeth"/>
-        <id value="-1,Epona"/>
-        <id value="-1,Felicia"/>
-        <id value="-1,Finch"/>
-        <id value="-1,HarpyDominantCompanion"/>
-        <id value="-1,Helena"/>
-        <id value="-1,Jules"/>
-        <id value="-1,Kalahari"/>
-        <id value="-1,Kate"/>
-        <id value="-1,ZaranixMaidKatherine"/>
-        <id value="-1,ZaranixMaidKelly"/>
-        <id value="-1,Kruger"/>
-        <id value="-1,HarpyBimboCompanion"/>
-        <id value="-1,HarpyNympho"/>
-        <id value="-1,Lilaya"/>
-        <id value="-1,Loppy"/>
-        <id value="-1,HarpyNymphoCompanion"/>
-        <id value="-1,Pix"/>
-        <id value="-1,Ralph"/>
-        <id value="-1,Rose"/>
-        <id value="-1,Roxy"/>
-        <id value="-1,Scarlett"/>
-        <id value="-1,Vicky"/>
-        <id value="-1,Zaranix"/>
-      </charactersEncountered>
-      <questMap>
-        <entry q0="MAIN_PROLOGUE" q1="MAIN_1_A_LILAYAS_TESTS" q10="MAIN_2_A_INTO_THE_DEPTHS" q11="MAIN_2_B_SIRENS_CALL" q2="MAIN_1_B_DEMON_HOME" q3="MAIN_1_C_WOLFS_DEN" q4="MAIN_1_D_SLAVERY" q5="MAIN_1_E_REPORT_TO_HELENA" q6="MAIN_1_F_SCARLETTS_FATE" q7="MAIN_1_G_SLAVERY" q8="MAIN_1_H_THE_GREAT_ESCAPE" q9="MAIN_1_I_ARTHURS_TALE" questLine="MAIN"/>
-        <entry q0="HARPY_PACIFICATION_ONE" q1="HARPY_PACIFICATION_TWO" q2="HARPY_PACIFICATION_THREE" q3="HARPY_PACIFICATION_REWARD" q4="SIDE_UTIL_COMPLETE" questLine="SIDE_HARPY_PACIFICATION"/>
-        <entry q0="SIDE_SLAVER_NEED_RECOMMENDATION" q1="SIDE_SLAVER_RECOMMENDATION_OBTAINED" q2="SIDE_UTIL_COMPLETE" questLine="SIDE_SLAVERY"/>
-        <entry q0="SIDE_HYPNO_WATCH_VICKY" q1="SIDE_HYPNO_WATCH_TEST_SUBJECT" q2="SIDE_UTIL_COMPLETE" questLine="SIDE_HYPNO_WATCH"/>
-        <entry q0="SLIME_QUEEN_ONE" q1="SLIME_QUEEN_TWO" q2="SLIME_QUEEN_THREE" questLine="SIDE_SLIME_QUEEN"/>
-        <entry q0="SIDE_ENCHANTMENTS_LILAYA_HELP" q1="SIDE_UTIL_COMPLETE" questLine="SIDE_ENCHANTMENT_DISCOVERY"/>
-        <entry q0="BUYING_BRAX_START" q1="BUYING_BRAX_DELIVER_PERFUME" q2="BUYING_BRAX_LOLLIPOPS" q3="BUYING_BRAX_DELIVER_LOLLIPOPS" q4="BUYING_BRAX_LIPSTICK" q5="BUYING_BRAX_DELIVER_LIPSTICK" q6="SIDE_UTIL_COMPLETE" questLine="SIDE_BUYING_BRAX"/>
-      </questMap>
-      <questFailedMap/>
-      <friendlyOccupants/>
-      <worldsVisited>
-        <world id="MUSEUM"/>
-        <world id="SUBMISSION"/>
-        <world id="HARPY_NEST"/>
-        <world id="ENFORCER_HQ"/>
-        <world id="GAMBLING_DEN"/>
-        <world id="NIGHTLIFE_CLUB"/>
-        <world id="SHOPPING_ARCADE"/>
-        <world id="DOMINION"/>
-        <world id="ANGELS_KISS_FIRST_FLOOR"/>
-        <world id="ZARANIX_HOUSE_GROUND_FLOOR"/>
-        <world id="LILAYAS_HOUSE_GROUND_FLOOR"/>
-        <world id="LILAYAS_HOUSE_FIRST_FLOOR"/>
-        <world id="ZARANIX_HOUSE_FIRST_FLOOR"/>
-        <world id="ANGELS_KISS_GROUND_FLOOR"/>
-        <world id="SLAVER_ALLEY"/>
-      </worldsVisited>
-      <itemsDiscovered>
-        <type>BOTTLED_ESSENCE_HUMAN</type>
-        <type>BOTTLED_ESSENCE_SLIME</type>
-        <type>BOTTLED_ESSENCE_BAT_MORPH</type>
-        <type>BOTTLED_ESSENCE_REINDEER_MORPH</type>
-        <type>BOTTLED_ESSENCE_COW_MORPH</type>
-        <type>BOTTLED_ESSENCE_IMP</type>
-        <type>BOTTLED_ESSENCE_FOX_MORPH</type>
-        <type>BOTTLED_ESSENCE_RABBIT_MORPH</type>
-        <type>ADDICTION_REMOVAL</type>
-        <type>BOTTLED_ESSENCE_DEMON</type>
-        <type>BOTTLED_ESSENCE_WOLF_MORPH</type>
-        <type>innoxia_race_human_vanilla_water</type>
-        <type>BOTTLED_ESSENCE_HORSE_MORPH</type>
-        <type>FETISH_UNREFINED</type>
-        <type>BOTTLED_ESSENCE_HARPY</type>
-        <type>DYE_BRUSH</type>
-        <type>FETISH_REFINED</type>
-        <type>BOTTLED_ESSENCE_RAT_MORPH</type>
-        <type>BOTTLED_ESSENCE_DOG_MORPH</type>
-        <type>BOTTLED_ESSENCE_ALLIGATOR_MORPH</type>
-        <type>BOTTLED_ESSENCE_CAT_MORPH</type>
-        <type>BOTTLED_ESSENCE_SQUIRREL_MORPH</type>
-      </itemsDiscovered>
-      <weaponsDiscovered>
-        <type>innoxia_kerambit_kerambit</type>
-        <type>innoxia_crystal_rare</type>
-      </weaponsDiscovered>
-      <clothingDiscovered>
-        <type>innoxia_leg_skirt</type>
-        <type>innoxia_piercing_ear_ring</type>
-        <type>innoxia_finger_ring</type>
-        <type>innoxia_torso_blouse</type>
-        <type>innoxia_ankle_anklet</type>
-        <type>nerdlinger_street_hitop_canvas_sneakers_hi_top_canvas_sneakers</type>
-        <type>innoxia_torso_tshirt</type>
-        <type>innoxia_foot_stiletto_heels</type>
-        <type>dsg_trenchcoat_trenchcoat</type>
-        <type>dsg_fedora_fedora</type>
-        <type>innoxia_bdsm_penis_strapon</type>
-        <type>innoxia_torsoOver_open_front_cardigan</type>
-        <type>innoxia_leg_jeans</type>
-        <type>innoxia_sock_socks</type>
-        <type>innoxia_sock_thighhigh_socks</type>
-      </clothingDiscovered>
-      <racesDiscovered/>
-      <racesDiscoveredAdvanced/>
-    </playerSpecific>
   </character>
 </exportedCharacter>
