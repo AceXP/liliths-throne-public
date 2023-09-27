@@ -3,16 +3,15 @@
   <character>
     <!--If you want to edit any of these values, just be warned that it might break the game...-->
     <core>
-      <pathName value="com.lilithsthrone.game.character.PlayerCharacter"/>
       <name nameAndrogynous="Jen" nameFeminine="Jen" nameMasculine="John"/>
       <surname value="Li"/>
       <genericName value=""/>
-      <description value="A shady dealer from Elis."/>
+      <description value="An enterprising trader from Elis."/>
       <playerKnowsName value="false"/>
       <playerOnFirstNameTerms value="false"/>
       <raceConcealed value="false"/>
       <level value="20"/>
-      <ageAppearanceDifference value="-3"/>
+      <ageAppearanceDifference value="0"/>
       <yearOfBirth value="2008"/>
       <monthOfBirth value="SEPTEMBER"/>
       <dayOfBirth value="10"/>

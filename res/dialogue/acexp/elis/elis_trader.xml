@@ -5,7 +5,7 @@
         <author><![CDATA[AceXp]]></author>
         <preParsingEffects><![CDATA[
 			[#flags.setFlag(FLAG_acexp_elis_trader_daily_interaction, true)]
-			[#var ElisTraderRnd = RND.nextInt(10)+1]
+			[##var ElisTraderRnd = RND.nextInt(10)+1]
 
             [#flags.setSavedLong('AceXpElisTrader', game.importModdedCharacter('res/characters/acexp/Elis_trader.xml', 'AceXpElisTrader'))]
             [#AceXpElisTrader.setTrader(true)]
@@ -14,6 +14,7 @@
 
 			[#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('WRIST_WOMENS_WATCH', false), RND.nextInt(3)+1, false, false)]
 			[#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('WRIST_MENS_WATCH', false), RND.nextInt(3)+1, false, false)]
+			[#AceXpElisTrader.addItem(game.getItemGen().generateItem('acexp_pills_sterility'), RND.nextInt(5)+1, false, false)]
 
    			#IF(ElisTraderRnd<=8)
     		    [#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('innoxia_finger_ring', false), RND.nextInt(3)+1, false, false)]
@@ -66,7 +67,7 @@
         <author><![CDATA[AceXp]]></author>
         <preParsingEffects><![CDATA[
 			[#flags.setFlag(FLAG_acexp_elis_trader_daily_interaction, true)]
-			[#var ElisTraderRnd = RND.nextInt(10)+1]
+			[##var ElisTraderRnd = RND.nextInt(10)+1]
 
             [#game.setModdedCharacterParserTarget(flags.getSavedLong('AceXpElisTrader'), 'AceXpElisTrader')]
             [#AceXpElisTrader.setTrader(true)]
@@ -75,6 +76,7 @@
 
 			[#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('WRIST_WOMENS_WATCH', false), RND.nextInt(3)+1, false, false)]
 			[#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('WRIST_MENS_WATCH', false), RND.nextInt(3)+1, false, false)]
+			[#AceXpElisTrader.addItem(game.getItemGen().generateItem('acexp_pills_sterility'), RND.nextInt(5)+1, false, false)]
 
    			#IF(ElisTraderRnd<=8)
     		    [#AceXpElisTrader.addClothing(game.getItemGen().generateClothing('innoxia_finger_ring', false), RND.nextInt(3)+1, false, false)]

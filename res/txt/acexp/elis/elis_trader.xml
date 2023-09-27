@@ -37,16 +37,16 @@
 
     <!-- Medium Affection: “Appreciate you stopping by, see you around!” she says before leaving in the opposite direction. -->
 
-    <!-- High Affection: The panda-girl gives you a hug before saying “Always great to see you, PCNAME, be safe.” before she walks in the opposite direction, a pep in her step. -->
+    <!-- High Affection: The panda-girl gives you a hug before saying “Always great to see you, [pc.Name], be safe.” before she walks in the opposite direction, a pep in her step. -->
     <htmlContent tag="TRADE_LEAVE"><![CDATA[
 	<p>
         The [AceXpElisTrader.race] nods, wordlessly leaving in the opposite direction.
 	</p>
 	]]></htmlContent>
 
-    <!-- Medium Affection: She spots you, and goes to meet you half way, leaning against the wall while facing you “Ah, my favorite PCRACE, looking to buy something? Chat?” -->
+    <!-- Medium Affection: She spots you, and goes to meet you half way, leaning against the wall while facing you “Ah, my favorite [pc.race], looking to buy something? Chat?” -->
 
-    <!-- High Affection: “Hey there, handsome/beautiful/cutie, always happy to see my favorite customer.” -->
+    <!-- High Affection: “Hey there, [style.random(handsome|beautiful|cutie)], always happy to see my favorite customer.” -->
 
     <htmlContent tag="REPEAT"><![CDATA[
 	<p>
@@ -67,7 +67,7 @@
 
     <htmlContent tag="CHAT"><![CDATA[
 	<p>
-	    You ask the panda-girl about herself and she raises a hand. [AceXpElisTrader.speech(Listen, pal/lady, I exchange goods and flames, not personal information. Not to be rude, but, if you’re not here to buy something, I’m not interested.)]
+	    You ask the panda-girl about herself and she raises a hand. [AceXpElisTrader.speech(Listen #IF(pc.isFeminine())lady#ELSEpal#ENDIF, I exchange goods and flames, not personal information. Not to be rude, but, if you’re not here to buy something, I’m not interested.)]
 	</p>
 	]]></htmlContent>
 
@@ -98,7 +98,7 @@
 	<p>
         You get a little bit closer to her and proposition the panda-girl with having some fun, causing her to raise an eyebrow.
 
-        [AceXpElisTrader.speech(Pal/Lady, I’m selling my stuff not myself, not to mention I don’t do my customers.)] Sensing some disappointment, she pats your shoulder. [AceXpElisTrader.speech(Sorry… Nothing personal.)]
+        [AceXpElisTrader.speech(#IF(pc.isFeminine())Lady#ELSEPal#ENDIF, I’m selling my stuff not myself, not to mention I don’t do my customers.)] Sensing some disappointment, she pats your shoulder. [AceXpElisTrader.speech(Sorry… Nothing personal.)]
 
 	</p>
 	]]></htmlContent>

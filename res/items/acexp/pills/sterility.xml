@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<item>
+	<coreAttributes>
+		<authorTag><![CDATA[A name stamped on the foil reads 'AceXp-Industries'.]]></authorTag>
+		<value>20</value> 
+		<determiner><![CDATA[a]]></determiner>
+		<name><![CDATA[sterility pill]]></name>
+		<namePlural pluralByDefault="false"><![CDATA[sterility pills]]></namePlural>
+		<description><![CDATA[A small, blue pill, individually packaged in a foil and plastic wrapper. It looks like a cheap knock-off copy of a sterility pill. Rumours that those kind of pills have unexpected side effects are probably widely exaggerated.]]></description>
+		
+		<useDescriptor>swallow</useDescriptor>
+		
+		<sexUse>true</sexUse>
+		<combatUseAllies>true</combatUseAllies>
+		<combatUseEnemies>false</combatUseEnemies>
+		<consumedOnUse>true</consumedOnUse>
+		
+		<rarity>COMMON</rarity> 
+		
+		<imageName>pill.svg</imageName> 
+		
+		<colourPrimary>CLOTHING_BLUE_NAVY</colourPrimary>
+		<colourSecondary/>
+		<colourTertiary/>
+		
+		<statusEffects>
+			<effect seconds="43200">PROMISCUITY_PILL</effect> <!-- 'seconds' defines how long the status effect should be applied for. -->
+		</statusEffects>
+		
+		<effectTooltipLines/>
+		
+		<applyEffects><![CDATA[
+			[##npc.removeStatusEffect(SE_VIXENS_VIRILITY)]
+			[##npc.removeStatusEffect(SE_BROODMOTHER_PILL)]
+			<p style='margin-bottom:0; padding-bottom:0;'>
+				The little blue pill easily slides down [npc.namePos] throat, and after only a few moments [npc.she] [npc.verb(feel)] a cool throbbing sensation taking root deep within [npc.her] loins.
+			</p>
+			[##var PillRnd = RND.nextInt(10)+1]
+   			#IF(PillRnd<=1)
+   				#IF(npc.hasBreasts())
+    		    	[#npc.incrementBreastSize(1)]
+    		    #ELSE
+    		    	[#npc.incrementFemininity(1)]
+    		    #ENDIF
+    		#ELSE
+   				#IF(PillRnd<=3)
+    		    	[#npc.incrementFemininity(RND.nextInt(2)+1)]
+    			#ELSE
+	   				#IF(PillRnd<=8)
+    			    	[#npc.incrementHairLength(RND.nextInt(3)+1)]
+    				#ENDIF
+	    		#ENDIF
+    		#ENDIF
+		]]></applyEffects>
+		
+		<itemTags>
+			<tag>ATTRIBUTE_TF_ITEM</tag>
+		</itemTags>
+	</coreAttributes>
+
+	<useDescriptions>
+		<selfUse><![CDATA[
+		[npc.Name] [npc.verb(pop)] a sterility pill out of its little foil wrapper, before quickly placing it in [npc.her] mouth and swallowing it down.
+		]]></selfUse>
+		<otherUse><![CDATA[
+		[npc.Name] [npc.verb(pop)] a sterility pill out of its little foil wrapper, before bringing it up to [npc2.namePos] [npc2.lips], forcing it into [npc2.her] mouth, and making sure that [npc2.she] [npc2.verb(swallow)] it down.
+		]]></otherUse>
+	</useDescriptions>
+
+	
+</item>
